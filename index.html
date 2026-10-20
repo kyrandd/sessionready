@@ -296,7 +296,7 @@ function me(t, o) {
   );
   return (
     KIJK
-      ? (T.scale.set(0.62, 0.62, 1), (T.position.y = 2.1))
+      ? (T.scale.set(0.46, 0.46, 1), (T.position.y = 1.95))
       : (T.scale.set(0.3, 0.3, 1), (T.position.y = 1.78)),
     (T.renderOrder = 5),
     T
@@ -399,11 +399,11 @@ function He(t, o, a) {
     ae = Z(-1),
     re = Z(1),
     _ = new e.Mesh(
-      new e.RingGeometry(0.34, 0.42, 40),
+      new e.RingGeometry(0.3, 0.36, 40),
       new e.MeshBasicMaterial({
         color: r.ring,
         transparent: !0,
-        opacity: 0.75,
+        opacity: 0.55,
         depthWrite: !1,
       }),
     );
@@ -749,6 +749,7 @@ function Le() {
       o.lineTo(M + Math.cos(T) * h, b + Math.sin(T) * h),
       o.stroke();
   }
+  (o.fillStyle = "rgba(255,255,255,0.03)"), o.fillRect(0, 0, 256, 512);
   let r = new e.CanvasTexture(t);
   return (
     (r.colorSpace = e.SRGBColorSpace),
@@ -774,8 +775,8 @@ var he = {
   achter: ["Achter", 50, 0],
   zijkant: ["Zijkant", 42, 90],
   boven: ["Boven", 84, 0],
-  volg: ["Volg de actie", 36, 0],
-  overzicht: ["Overzicht", 44, 0],
+  volg: ["Volg de actie", 38, 0],
+  overzicht: ["Overzicht", 40, 0],
 };
 function ue() {
   let t = new e.WebGLRenderer({ antialias: !0, preserveDrawingBuffer: !0 });
@@ -834,7 +835,7 @@ function ue() {
       i = m * H.s,
       l = b.clone();
     (l.needsUpdate = !0),
-      l.repeat.set((s + 120) / 4, (i + 120) / 4),
+      l.repeat.set((s + 120) / 12, (i + 120) / 12),
       (k = new e.Mesh(
         new e.PlaneGeometry(s + 120, i + 120),
         new e.MeshStandardMaterial({
@@ -904,7 +905,7 @@ function ue() {
       a = I(box.x0, box.y0),
       b = I(box.x1, box.y1),
       mid = a.clone().add(b).multiplyScalar(0.5),
-      hoog = KIJK ? 2.6 : 1.2,
+      hoog = KIJK ? 1.9 : 1.2,
       u = [
         [a.x, a.z],
         [b.x, a.z],
@@ -921,7 +922,7 @@ function ue() {
         cam.updateMatrixWorld(),
         u.every((S) => {
           let E = S.clone().project(cam);
-          return Math.abs(E.x) < 0.92 && Math.abs(E.y) < 0.86 && E.z < 1;
+          return Math.abs(E.x) < 0.96 && Math.abs(E.y) < 0.9 && E.z < 1;
         })
           ? (p = d)
           : (c = d);
@@ -1028,7 +1029,7 @@ function ue() {
       d = new e.Group();
     if (w.type === "pass") {
       let v = l.clone().add(u).multiplyScalar(0.5);
-      v.y = Math.min(1.6, p * 0.12);
+      v.y = Math.min(KIJK ? 0.55 : 1.6, p * (KIJK ? 0.05 : 0.12));
       let S = new e.QuadraticBezierCurve3(
           l.clone().setY(0.15),
           v,
@@ -1177,13 +1178,13 @@ function ue() {
           });
         let E = I(s.x, s.y);
         i.position.set(E.x, 0, E.z);
-        let R = H.w * H.s,
-          U = Math.min(1.6, Math.max(1, R / 30)) * (KIJK ? 1.3 : 1),
-          F = Math.min(3.4, Math.max(2.4, R / 8));
+        let R = Math.max(H.w, H.h) * H.s,
+          U = KIJK ? Math.min(1.7, Math.max(1.2, R / 22)) : Math.min(1.6, Math.max(1, R / 30)),
+          F = KIJK ? Math.min(2.3, Math.max(1.5, U * 1.5)) : Math.min(3.4, Math.max(2.4, R / 8));
         W[te(s)]
           ? i.scale.multiplyScalar(U)
           : ["bal", "hoed", "kegel", "tennis"].includes(s.type)
-            ? i.scale.multiplyScalar(s.type === "tennis" ? F * 1.5 : F)
+            ? i.scale.multiplyScalar(s.type === "tennis" ? F * 1.5 : KIJK && s.type !== "bal" ? F * 0.85 : F)
             : s.type === "hek"
               ? i.scale.multiplyScalar(2)
               : ["lijn", "paal", "hoepel", "ladder"].includes(s.type) &&
@@ -1218,16 +1219,25 @@ function ue() {
                 -Math.cos((s.r * Math.PI) / 180),
               )
             : null),
-        s.type === "bal" && (i.userData.bal.rotation.x += p / 0.22);
+        s.type === "bal" &&
+          p > 1e-4 &&
+          i.userData.bal.rotateOnWorldAxis(
+            new e.Vector3(c / p, 0, -u / p),
+            p / (0.11 * i.scale.x),
+          );
       let d = i.userData;
       if (d.lijf) {
         let v = Math.max(0.001, (x - z) / 1e3),
           S = p / v / Math.max(0.001, H.s);
-        p > 0.002 && p < 1.2 * i.scale.x
-          ? ((i.rotation.y = Math.atan2(u, c)), (d.bewoog = x))
-          : p >= 1.2 * i.scale.x && ((d.bewoog = 0), (d.direct = !0));
-        let E = S > 0.6 ? Math.min(1, S / 6) : 0;
-        d.fase += (p * 9) / i.scale.x;
+        if (p > 0.002 && p < 1.2 * i.scale.x) {
+          let doelR = Math.atan2(u, c),
+            dr = Math.atan2(Math.sin(doelR - i.rotation.y), Math.cos(doelR - i.rotation.y));
+          (i.rotation.y += dr * (d.bewoog ? 0.22 : 1)), (d.bewoog = x);
+        } else p >= 1.2 * i.scale.x && ((d.bewoog = 0), (d.direct = !0));
+        let doelE = S > 0.4 ? Math.min(1, S / 5) : 0;
+        d.E = (d.E ?? 0) + (doelE - (d.E ?? 0)) * (doelE > (d.E ?? 0) ? 0.25 : 0.12);
+        let E = d.E < 0.02 ? 0 : d.E;
+        d.fase += (p * 7.5) / i.scale.x;
         let R = d.fase,
           U = Math.sin(x / 700 + d.fase) * 0.01;
         (d.L.heup.rotation.x = E * Math.sin(R) * 0.75),
@@ -1239,7 +1249,7 @@ function ue() {
           (d.AL.elle.rotation.x = -0.25 - E * 0.9),
           (d.AR.elle.rotation.x = -0.25 - E * 0.9),
           (d.lijf.position.y = E * Math.abs(Math.sin(R)) * 0.04 + U),
-          (d.lijf.rotation.x = E * 0.18),
+          (d.lijf.rotation.x = E * 0.14),
           d.ring.material.color.setHex(
             (y instanceof Set ? y.has(s.id) : y === s.id) ? 16022048 : d.kleur,
           ),
@@ -1249,7 +1259,7 @@ function ue() {
               : 1,
           ),
           (d.ring.material.opacity =
-            KIJK && (y instanceof Set ? y.has(s.id) : y === s.id) ? 1 : 0.75);
+            KIJK && (y instanceof Set ? y.has(s.id) : y === s.id) ? 0.95 : 0.45);
       }
     }
     for (let [s, i] of D) m.has(s) || (h.remove(i), D.delete(s));
@@ -5312,7 +5322,7 @@ function bordScherm() {
       }
       bvideo.disabled = !0;
       try {
-        const { s: sc, groepen: gr } = tijdlijnUitStappen(bord.stappen);
+        const { s: sc, groepen: gr } = tijdlijnUitStappen(bord.stappen, bord.veld);
         await exporteerVideo({
           s: sc,
           groepen: gr,
@@ -6320,12 +6330,29 @@ function maakAnimatie({ items, lijnen }) {
   }
   return { frames, stappen: lijnen };
 }
+function veldMarge(veld) {
+  const v = VELDEN[veld];
+  if (!v) return 0;
+  const groot = Math.max(v.w, v.h) * (v.s || 0.25),
+    m = groot < 30 ? Math.min(5, Math.max(2.5, groot * 0.18)) : 2;
+  return m / (v.s || 0.25);
+}
+function omgeving(w, h, m) {
+  const W = w + 2 * m,
+    H = h + 2 * m,
+    n = Math.max(6, Math.round(W / 14));
+  let st = "";
+  for (let i = 0; i < n; i += 2)
+    st += `<rect x="${(-m + (i * W) / n).toFixed(2)}" y="${-m}" width="${(W / n).toFixed(2)}" height="${H}" fill="#ffffff08"/>`;
+  return `<rect x="${-m}" y="${-m}" width="${W}" height="${H}" fill="#24663f"/>${st}`;
+}
 function schetsSvg(items, lijnen, veld, zones = []) {
   const bewaard = bord;
   (bord = { ...bord, veld, stappen: [{ items, lijnen, zones }] }),
-    (toonNummers = !0);
+    (toonNummers = !1);
   const { w, h } = VELDEN[veld],
-    svg = `<svg viewBox="0 0 ${w} ${h}" class="schets-bord" role="img" aria-label="Schets van de oefening">${bordSvgInhoud(items, lijnen, zones).replaceAll('id="pijl"', `id="pijl-${veld}"`).replaceAll("url(#pijl)", `url(#pijl-${veld})`)}</svg>`;
+    m = veldMarge(veld),
+    svg = `<svg viewBox="${-m} ${-m} ${w + 2 * m} ${h + 2 * m}" class="schets-bord" role="img" aria-label="Schets van de oefening">${m ? omgeving(w, h, m) : ""}${bordSvgInhoud(items, lijnen, zones).replace(`<rect width="${w}" height="${h}" fill="#2c7a52"/>`, `<rect width="${w}" height="${h}" fill="#2c7a52"${VELDEN[veld].rand ? "" : ' stroke="#ffffffa6" stroke-width=".45"'}/>`).replaceAll('id="pijl"', `id="pijl-${veld}"`).replaceAll("url(#pijl)", `url(#pijl-${veld})`)}</svg>`;
   return (bord = bewaard), (toonNummers = !1), svg;
 }
 const LEERDOELEN = [
@@ -7518,7 +7545,7 @@ function schetsSpelerHtml(o, s, ids = "") {
       <div class="b3d sp-3d"${id("d3")} hidden></div>
       <button type="button" class="sp-speel sp-rond"${id("speel")} aria-pressed="true" aria-label="Afspelen of pauzeren"><span class="ik-pauze"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/></svg></span><span class="ik-speel"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4.5 2.5l9 5.5-9 5.5z" fill="currentColor"/></svg></span></button>
       <div class="sp-cam" role="radiogroup" aria-label="Camera" hidden>${Object.entries(
-        { volg: "Volg", overzicht: "Overzicht", boven: "Boven" },
+        { overzicht: "Overzicht", volg: "Volg", boven: "Boven" },
       )
         .map(([k, l]) => `<button type="button" role="radio" data-cam="${k}">${l}</button>`)
         .join("")}</div>
@@ -7670,28 +7697,23 @@ function maakTijdlijn(s) {
         (g2.naar = kloon(stand));
     }
   }
+  const mpu = s.mpu || 0.25;
   for (const g2 of groepen) {
     const duren = Object.values(g2.bewegingen).map(
-      (b2) =>
-        (b2.dur = Math.min(
-          3200,
-          b2.soort === "pass"
-            ? 420 + b2.len * 18
-            : b2.soort === "loop"
-              ? 500 + b2.len * 38
-              : 700 + b2.len * 48,
-        )),
+      (b2) => (b2.dur = duurVoor(b2.soort, b2.len * mpu)),
     );
-    g2.duur = Math.min(3200, Math.max(650, ...duren));
+    g2.duur = Math.min(3800, Math.max(900, ...duren));
   }
   return groepen;
 }
-function tijdlijnUitStappen(stappen2) {
+function tijdlijnUitStappen(stappen2, veld) {
+  const mpu = VELDEN[veld]?.s || 0.25;
   if (stappen2.length < 2) {
     const s = {
       items: structuredClone(stappen2[0].items),
       lijnen: structuredClone(stappen2[0].lijnen),
       zones: stappen2[0].zones || [],
+      mpu,
     };
     return { s, groepen: maakTijdlijn(s) };
   }
@@ -7718,17 +7740,14 @@ function tijdlijnUitStappen(stappen2) {
     const naarVol = naar.filter((x) => vanMap[x.id]),
       duren = Object.values(bewegingen).map(
         (b2) =>
-          (b2.dur = Math.min(
-            3200,
-            b2.soort === "pass" ? 420 + b2.len * 18 : 500 + b2.len * 38,
-          )),
+          (b2.dur = duurVoor(b2.soort, b2.len * mpu)),
       );
     groepen.push({
       lijnen: idx,
       van: structuredClone(van.filter((x) => naar.some((y) => y.id === x.id))),
       naar: structuredClone(naarVol),
       bewegingen,
-      duur: Math.min(3200, Math.max(650, ...duren)),
+      duur: Math.min(3800, Math.max(900, ...duren)),
     });
   }
   return {
@@ -7740,9 +7759,19 @@ function tijdlijnUitStappen(stappen2) {
     groepen,
   };
 }
+function duurVoor(soort, m) {
+  return Math.min(
+    3800,
+    soort === "pass" || soort === "dribbelbal" && !1
+      ? 380 + m * 95
+      : soort === "loop"
+        ? 520 + m * 230
+        : 650 + m * 330,
+  );
+}
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2),
   easeOut = (t) => 1 - (1 - t) ** 3,
-  TIJD = { RUST: 140, EIND: 1500, VERVAAG: 320 };
+  TIJD = { RUST: 360, EIND: 1900, VERVAAG: 380 };
 function toestandOp(groepen, s, t, { lus = !0 } = {}) {
   const { RUST, EIND, VERVAAG } = TIJD,
     totaal =
@@ -7761,7 +7790,10 @@ function toestandOp(groepen, s, t, { lus = !0 } = {}) {
         b2 = g2.bewegingen[i.id];
       if (!b2) return { ...i, x: a.x, y: a.y };
       const kk = b2.dur ? Math.min(1, (k2 * g2.duur) / b2.dur) : k2,
-        e = b2.soort === "pass" ? easeOut(kk) : easeInOut(kk);
+        e =
+          b2.soort === "pass"
+            ? 1 - (1 - kk) ** 2.2
+            : 0.5 - Math.cos(Math.PI * kk) / 2;
       let x = a.x + (i.x - a.x) * e,
         y = a.y + (i.y - a.y) * e;
       if (b2.soort === "dribbelbal") {
@@ -7929,12 +7961,12 @@ function svgAnimator(svg, s) {
     });
   };
 }
-let camVoorkeur = "volg";
+let camVoorkeur = "overzicht";
 function schetsSpeler(root, o, s, { start, bijWissel } = {}) {
   let groepen;
   o.stappen?.length > 1
-    ? ({ s, groepen } = tijdlijnUitStappen(o.stappen))
-    : (groepen = maakTijdlijn(s));
+    ? ({ s, groepen } = tijdlijnUitStappen(o.stappen, o.veld))
+    : ((s.mpu = VELDEN[o.veld]?.s), (groepen = maakTijdlijn(s)));
   const d2 = root.querySelector(".sp-2d"),
     d3 = root.querySelector(".sp-3d"),
     knop = root.querySelector(".sp-speel"),
@@ -7953,7 +7985,13 @@ function schetsSpeler(root, o, s, { start, bijWissel } = {}) {
         { x: l.pts[2], y: l.pts[3] },
       ]),
     ].filter((p) => !["lijn"].includes(p.type)),
-    overzicht = kaderVan(allePunten, 4, 30, 22, veldMaat),
+    marge = veldMarge(o.veld),
+    overzicht = {
+      x0: -marge * 0.15,
+      y0: -marge * 0.15,
+      x1: veldMaat.w + marge * 0.15,
+      y1: veldMaat.h + marge * 0.15,
+    },
     kaders = groepen.map((g2) => {
       const ids = Object.keys(g2.bewegingen),
         pts = [
@@ -7971,7 +8009,7 @@ function schetsSpeler(root, o, s, { start, bijWissel } = {}) {
         ];
       const k2 = kaderVan(pts, 7, 36, 26, veldMaat);
       if (!k2 || !overzicht) return k2 || overzicht;
-      const mix = (a, b2) => a + (b2 - a) * 0.5;
+      const mix = (a, b2) => a + (b2 - a) * 0.35;
       return {
         x0: mix(overzicht.x0, k2.x0),
         y0: mix(overzicht.y0, k2.y0),
@@ -8018,7 +8056,7 @@ function schetsSpeler(root, o, s, { start, bijWissel } = {}) {
           k: bezig ? Math.min(1, st.k * 1.4) : 1,
           actief: new Set(bezig ? st.bewegers : []),
           zones: s.zones,
-          focus: bezig ? kaders[gi] : overzicht,
+          focus: bezig && bord3d?.camera?.() === "volg" ? kaders[gi] : overzicht,
         };
         return;
       }
@@ -8122,7 +8160,7 @@ function schetsSpeler(root, o, s, { start, bijWissel } = {}) {
         bord3d.zetVeld(
           o.veld,
           VELDEN[o.veld],
-          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" width="${vw * 16}" height="${vh * 16}">${veldSvg(o.veld, !0)}</svg>`,
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" width="${vw * 16}" height="${vh * 16}">${veldSvg(o.veld, !0)}${VELDEN[o.veld].rand ? "" : `<rect x=".3" y=".3" width="${vw - 0.6}" height="${vh - 0.6}" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width=".5"/>`}</svg>`,
         );
         const bw = d3.clientWidth || 600;
         bord3d.resize(bw, d3.clientHeight || Math.round(bw * 0.62)),
@@ -8179,6 +8217,7 @@ async function exporteerVideo({ s, veld, titel, status, groepen: vast }) {
     status("Uw browser kan geen video maken.");
     return;
   }
+  s.mpu ??= VELDEN[veld]?.s;
   const groepen = vast || maakTijdlijn(s),
     host = document.createElement("div");
   (host.style.cssText = "position:fixed;left:-10000px;top:0;width:900px;"),
