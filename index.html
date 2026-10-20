@@ -208,6 +208,34 @@
 @media (max-width:400px){.app-kop .kop{gap:8px;padding-inline:12px}.app-kop .merk{font-size:1.25rem;gap:6px}.app-kop .merk svg{width:28px;height:28px}.kop-rechts .btn{padding:0 12px;font-size:14px}.app-kop .terug-knop{width:40px;height:40px;flex:none}}
 @media (max-width:400px){.app-kop .woordmerk{font-size:1.2rem}}
 @media (max-width:350px){.app-kop .woordmerk{font-size:1.05rem}.app-kop .merkteken{width:26px;height:26px}}
+.veld{grid-template-columns:minmax(0,1fr)}
+.veld>*{min-width:0}
+.veld-kop>*{min-width:0}
+@media (max-width:350px){.veld-stip{gap:4px}.veld-stip i{width:14px}}
+/* startpagina: demo naast de training */
+.hero-kort{grid-template-columns:minmax(0,1fr)!important;gap:28px;padding-bottom:64px}
+.hero-kort .hero-tekst{max-width:46rem}
+.hero-kort h1{font-size:clamp(2.6rem,6.4vw,4.8rem);max-width:18ch}
+.demo-paneel{background:#ffffff0a;border:1px solid #ffffff1f;border-radius:20px;padding:20px}
+.demo-kop h2.demo-titel{font:800 clamp(1.6rem,3vw,2rem)/1 var(--cond);color:#fff;margin:0}
+.demo-kop p{color:#b7d2c0;margin:6px 0 0}
+.demo-grid{display:grid;gap:20px;margin-top:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.demo-grid{grid-template-columns:minmax(0,21rem) minmax(0,1fr);align-items:start}.demo-grid .demo{position:sticky;top:88px}}
+.demo-paneel .demo{margin-top:0;max-width:none}
+.demo-paneel .demo-rij.twee{grid-template-columns:minmax(0,1fr);gap:14px}
+.demo-paneel .demo-rij .wrap-seg{grid-template-columns:repeat(2,minmax(0,1fr))}
+.demo-paneel .demo-rij .wrap-seg.leeftijd-seg{grid-template-columns:repeat(4,minmax(0,1fr))}
+.demo-noot{margin:16px 0 0;color:#d6e8dc;font-size:15px;line-height:1.5;border-left:3px solid var(--kegel);padding-left:12px;max-width:52rem}
+.demo-noot strong{color:#fff}
+/* vragen: compact */
+#faq .faq{max-width:64rem;margin-top:16px;display:block;column-gap:40px;border-top:0}
+@media (min-width:860px){#faq .faq{column-count:2}}
+#faq .faq details{break-inside:avoid;border-bottom:1px solid var(--line)}
+#faq .faq summary{font:600 16px/1.35 var(--sans);padding:12px 0;align-items:center}
+#faq .faq summary:after{font-size:1.3rem}
+#faq .faq details p{font-size:15px;padding-bottom:12px;margin:0}
+@media (min-width:900px){.hero-kort{padding-top:20px}.hero-kort h1{font-size:clamp(2.6rem,5vw,4rem)}}
+.gsm-balk span{transition:width 1s linear}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -11550,18 +11578,20 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
   },
   start() {
     app.innerHTML = `<div class="land-kop"><nav class="kop" aria-label="Hoofdmenu"><button class="merk merk-knop" id="lmerk" aria-label="SessionReady, naar boven">${merk(!0)}</button>
-        <span class="navlinks"><button data-naar="hoe">Hoe het werkt</button><button data-naar="prijs">Prijzen</button><button data-naar="bib" id="nbib">Bibliotheek</button><button data-naar="tekenbord" id="nbord">Tekenbord</button><button data-naar="faq">Vragen</button><button id="noverons">Over ons</button></span>
+        <span class="navlinks"><button data-naar="hoe">Hoe het werkt</button><button data-naar="bib" id="nbib">Bibliotheek</button><button data-naar="tekenbord" id="nbord">Tekenbord</button><button data-naar="prijs">Prijzen</button><button data-naar="faq">Vragen</button><button id="noverons">Over ons</button></span>
         <span class="navknoppen"><button class="btn licht" id="b">Inloggen</button><button class="btn kegel nav-cta" id="a0">Begin nu</button></span></nav></div>
       <header class="hero">
-      <div class="hero-in">
-        <div>
+      <div class="hero-in hero-kort">
+        <div class="hero-tekst">
           <p class="voor">Voor jeugdtrainers U6\u2013U13</p>
           <h1 tabindex="-1">Vanavond training? Over \xE9\xE9n minuut ligt ze klaar.</h1>
           <p class="lead">SessionReady stelt een volledige training samen, van opwarming tot de wedstrijd op het einde, afgestemd op uw spelers, uw materiaal en uw stuk veld.</p>
-          <div class="acties"><button class="btn kegel" id="a">Begin met SessionReady</button><button class="btn licht demo-knop" data-naar="demo-uitleg">Probeer de demo</button></div>
-          <p class="klein">Pro voor <strong>\u20AC 4,92 per maand</strong> (\u20AC 59 per seizoen). Studenten: \u20AC 10, \xE9\xE9n keer. Probeer eerst de demo hieronder.</p>
-          <div class="demo" id="demo" role="group" aria-label="Demo: stel een training samen">
-            <p class="demo-titel" id="demo-uitleg">Probeer het hier. Kies en kijk hoe de training verandert.</p>
+          <div class="acties"><button class="btn kegel" id="a">Begin met SessionReady</button></div>
+        </div>
+        <section class="demo-paneel" aria-labelledby="demo-uitleg">
+          <div class="demo-kop"><h2 class="demo-titel" id="demo-uitleg">Probeer het meteen</h2><p>Kies uw ploeg, en de training past zich meteen aan.</p></div>
+          <div class="demo-grid">
+          <div class="demo" id="demo" role="group" aria-label="Stel een training samen">
             <div class="demo-rij"><span class="demo-lab" id="dl-l">Leeftijd</span><div class="seg wrap-seg leeftijd-seg" role="radiogroup" aria-labelledby="dl-l">${["U6", "U7", "U8", "U9", "U10", "U11", "U12", "U13"].map((l) => `<button role="radio" data-k="leeftijd" data-v="${l}">${l}</button>`).join("")}</div></div>
             <div class="demo-rij"><span class="demo-lab" id="dl-d">Leerdoel</span><div class="seg wrap-seg" role="radiogroup" aria-labelledby="dl-d">${Object.entries(
               DOELEN,
@@ -11576,17 +11606,13 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
               <div><span class="demo-lab" id="dl-t">Duur</span><div class="seg" role="radiogroup" aria-labelledby="dl-t">${[45, 60, 65, 75, 90].map((d) => `<button role="radio" data-k="duur" data-v="${d}">${d}\u2032</button>`).join("")}</div></div>
             </div>
           </div>
-        </div>
-        <figure class="klembord" style="margin:0" aria-label="Voorbeeldtraining"><div class="fiche" id="fiche"></div></figure>
+          <figure class="klembord" style="margin:0" aria-label="Uw training"><div class="fiche" id="fiche"></div></figure>
+          </div>
+          <p class="demo-noot"><strong>Dit is maar een klein stukje van de app.</strong> Met een account stelt u uw eigen ploeg en materiaal in, kiest u uit meer dan 460 oefeningen met animaties in 2D en 3D, tekent u uw eigen oefeningen en neemt u de training mee naar het veld.</p>
+        </section>
       </div>
     </header>
     <main>
-      <section class="band" aria-label="Waarvoor SessionReady gemaakt is">
-        <p><strong>${isNL() ? "4, 6 en 8 tegen 8" : "5 tegen 5 en 8 tegen 8"}</strong>${isNL() ? "De wedstrijdvormen en regels van de KNVB." : "De spelvormen van de Vlaamse jeugdwerking."}</p>
-        <p><strong>Uw materiaal</strong>Geen oefening die u niet kunt uitzetten.</p>
-        <p><strong>Spelend leren</strong>Elke oefening is een spel met een doel, zoals in de wedstrijd.</p>
-      </section>
-
       <section class="sectie" id="hoe" aria-labelledby="h-hoe">
         <h2 id="h-hoe">Van ploeg tot training in drie stappen</h2>
         <ol class="stappen-lijst">
@@ -11596,22 +11622,11 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         </ol>
       </section>
 
-      <section class="sectie" id="prijs" aria-labelledby="h-prijs">
-        <h2 id="h-prijs">E\xE9n abonnement, alles erin</h2><p class="prijs-hint">Veeg voor de studentenprijs.</p>
-        <div class="prijzen twee">
-          <div class="prijs pro"><h3>Pro</h3><p class="bedrag">\u20AC 4,92 <span>per maand</span></p><p class="hint">\u20AC 59 per seizoen, \xE9\xE9n keer per 12 maanden betaald. Liever per maand betalen? \u20AC 6,99, maandelijks opzegbaar.</p><ul><li>Een volledige training in een minuut, op maat van uw ploeg</li><li>De hele bibliotheek met animaties, in vier niveaus</li><li>Onbeperkt trainingen, 3D, afdrukken en video</li><li>Altijd op te zeggen, uw trainingen blijven bewaard</li></ul><button class="btn kegel" id="a4">Begin met SessionReady</button></div>
-          <div class="prijs student"><span class="prijs-lint">Voor studenten</span><h3>Student</h3><p class="bedrag">\u20AC 10 <span>\xE9\xE9n keer</span></p><p class="hint">Voor uw hele studie, tot vijf jaar: minder dan \u20AC 0,20 per maand. Geen abonnement.</p><ul><li>Alles van Pro</li><li>Log in met uw gewone e-mail, bevestig met uw studentenmail</li><li>Voor studenten in Belgi\xEB en Nederland</li><li>Na de studie: de gewone prijs</li></ul><button class="btn main" id="a3">Ik ben student</button></div>
-          
-        </div>
-        <p class="student-regel">Eerst zien hoe het werkt? <button class="link" data-naar="demo-uitleg">Probeer de demo bovenaan</button>: u stelt een echte training samen, zonder account.</p>
-      </section>
-
       <section class="sectie toon" id="bib" aria-labelledby="h-bib">
         <div class="toon-tekst">
           <h2 id="h-bib">Een bibliotheek die zoekt zoals een trainer denkt</h2>
-          <p class="lead">Filter op leeftijd, leerdoel en onderwerp. Elke oefening heeft een veldschets, de opstelling, coachpunten en hoe u ze makkelijker of moeilijker maakt.</p>
-          <ul class="vinkjes"><li>Per leeftijd van U6 tot U13, ook de onderbouw met 5 tegen 5</li><li>Elke oefening makkelijker of moeilijker te maken, afgestemd op uw groep</li><li>Elke oefening opent in het tekenbord, in 2D of 3D</li></ul>
-          <div><button class="btn main" id="obib">Maak een account en open de bibliotheek</button></div>
+          <p class="lead">Filter op leeftijd, leerdoel en onderwerp. Elke oefening heeft een veldschets, de opstelling en coachpunten.</p>
+          <ul class="vinkjes"><li>Meer dan 460 oefeningen, van U6 tot U13</li><li>Vier niveaus per oefening</li><li>Elke oefening opent in 2D of 3D</li></ul>
         </div>
         <div class="scherm" aria-hidden="true">
           <div class="scherm-balk"><span></span><span></span><span></span></div>
@@ -11649,7 +11664,6 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <h2 id="h-bord">Teken uw eigen oefening, en laat ze bewegen</h2>
           <p class="lead">Zet spelers, kegels, potjes en doeltjes op het veld, teken passes, looplijnen en dribbels, en verdeel de oefening in stappen. Bij het afspelen schuiven de spelers van stap naar stap.</p>
           <ul class="vinkjes"><li>Vrij vak, 5 tegen 5, half veld en 8 tegen 8</li><li>Stappen die als animatie afspelen</li><li>Bewaar als afbeelding voor de WhatsApp-groep van uw ploeg</li></ul>
-          <div><button class="btn main" id="obord">Maak een account en open het tekenbord</button></div>
         </div>
         <div class="scherm"><div class="scherm-balk" aria-hidden="true"><span></span><span></span><span></span></div><svg id="mini-bord" class="mini-bord" role="img" aria-label="Voorbeeld van het tekenbord: rondo 4 tegen 2"></svg></div>
       </section>
@@ -11686,6 +11700,15 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         </div>
       </section>
 
+      <section class="sectie" id="prijs" aria-labelledby="h-prijs">
+        <h2 id="h-prijs">E\xE9n abonnement, alles erin</h2>
+        <div class="prijzen twee">
+          <div class="prijs pro"><h3>Pro</h3><p class="bedrag">\u20AC 4,92 <span>per maand</span></p><p class="hint">\u20AC 59 per seizoen. Of \u20AC 6,99 per maand, maandelijks opzegbaar.</p><ul><li>Onbeperkt trainingen voor al uw ploegen</li><li>De hele bibliotheek, in vier niveaus</li><li>3D, afdrukken en video</li><li>Coach Kiki denkt mee</li></ul><button class="btn kegel" id="a4">Begin met SessionReady</button></div>
+          <div class="prijs student"><h3>Student</h3><p class="bedrag">\u20AC 10 <span>\xE9\xE9n keer</span></p><p class="hint">E\xE9n keer betalen, zolang u student bent. Geen abonnement.</p><ul><li>Alles van Pro</li><li>Hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Bevestigen met uw studentenmail</li><li>Daarna de gewone prijs</li></ul><button class="btn main" id="a3">Ik ben student</button></div>
+          
+        </div>
+      </section>
+
       <section class="sectie" id="faq" aria-labelledby="h-faq">
         <h2 id="h-faq">Vragen van trainers</h2>
         <div class="faq">
@@ -11696,15 +11719,15 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <details><summary>Werkt het op mijn gsm, ook op het veld?</summary><p>Ja, in de browser van uw gsm, zonder iets te installeren. U kunt de app op uw beginscherm zetten. Een training die u geopend hebt, blijft beschikbaar als het bereik aan het veld wegvalt.</p></details>
           <details><summary>Kan ik mijn eigen oefeningen toevoegen?</summary><p>Ja. Teken ze op het tekenbord, in stappen die als animatie afspelen, of laat Coach Kiki ze uit een pdf of Word-bestand overnemen. Uw eigen oefeningen ziet alleen u, tenzij u ze deelt met uw club.</p></details>
           <details><summary>Wie maakt de oefeningen?</summary><p>Ons team van jeugdtrainers. Elke oefening is uitgeschreven met een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
-          <details><summary>Kan ik het eerst proberen?</summary><p>Ja. Met de demo bovenaan deze pagina stelt u een echte training samen met oefeningen uit de bibliotheek, zonder account.</p></details>
+          <details><summary>Kan ik het eerst proberen?</summary><p>Ja, met de demo bovenaan, zonder account. De app zelf doet veel meer: uw eigen ploeg, de hele bibliotheek, het tekenbord en de fiche op het veld.</p></details>
           <details><summary>Wat kost het per maand?</summary><p>\u20AC 4,92 per maand als u per seizoen betaalt (\u20AC 59 voor twaalf maanden), of \u20AC 6,99 per maand als u maandelijks wilt kunnen opzeggen. De btw is inbegrepen.</p></details>
-          <details><summary>Hoe werkt de studentenkorting?</summary><p>U maakt een account met uw gewone e-mail en bevestigt daarna uw studentenmail van een hogeschool of universiteit in Belgi\xEB of Nederland met een code. U betaalt \u20AC 10, \xE9\xE9n keer, voor uw hele studie (tot vijf jaar).</p></details>
+          <details><summary>Hoe werkt de studentenkorting?</summary><p>U maakt een account met uw gewone e-mail en bevestigt daarna uw studentenmail van een hogeschool of universiteit in Belgi\xEB of Nederland met een code. U betaalt \xE9\xE9n keer \u20AC 10 en hebt Pro zolang u student bent.</p></details>
           <details><summary>Kan ik Pro opzeggen?</summary><p>Ja, op elk moment. Uw ploegen en bewaarde trainingen blijven staan, ook als u later opnieuw begint.</p></details>
           <details><summary>Kan ik mijn aankoop herroepen?</summary><p>Ja. Binnen 14 dagen na de aankoop kunt u zonder reden afzien van Pro of de studentenprijs. Omdat Pro meteen start, betaalt u dan alleen voor de dagen dat u het al gebruikte; de rest krijgt u binnen 14 dagen terug.</p></details>
         </div>
       </section>
 
-      <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Uw volgende training staat klaar voor u naar het veld vertrekt.</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
+      <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Klaar voor uw volgende training?</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
     </main>
     <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${PUBLIEK ? '<a class="link" href="/privacy">Privacy</a><a class="link" href="/voorwaarden">Voorwaarden</a>' : '<a class="link" href="/juridisch">Bedrijfsgegevens en privacy</a><a class="link" href="/voorwaarden">Voorwaarden</a>'}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
     for (const id of ["a", "a0", "a2", "a4"])
@@ -11756,6 +11779,17 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         (demo.spelers = Math.min(20, demo.spelers + 1)), toonDemo(!1);
       }),
       (document.getElementById("kiki-plek").innerHTML = AVATAR(180));
+    {
+      const klok = app.querySelector(".gsm-klok"),
+        balk = app.querySelector(".gsm-balk span");
+      let rest = 760;
+      const tikGsm = setInterval(() => {
+        if (!klok?.isConnected) return clearInterval(tikGsm);
+        rest = rest > 0 ? rest - 1 : 900;
+        klok.textContent = `${Math.floor(rest / 60)}:${String(rest % 60).padStart(2, "0")}`;
+        balk && (balk.style.width = `${Math.round(100 - (rest / 900) * 100)}%`);
+      }, 1e3);
+    }
     const lk = app.querySelector(".land-kop"),
       opScroll = () => {
         if (!lk.isConnected) {
@@ -11766,14 +11800,12 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       };
     if (
       (addEventListener("scroll", opScroll, { passive: !0 }),
-      (obord.onclick = () => go("bord")),
-      (obib.onclick = () => go("bib")),
       PUBLIEK)
     ) {
       const naar = (url) => () => {
         location.href = url;
       };
-      for (const id of ["a", "a0", "a2", "a4", "obord", "obib"])
+      for (const id of ["a", "a0", "a2", "a4"])
         document.getElementById(id).onclick = naar("/registreren");
       (a3.onclick = naar("/registreren")),
         (b.onclick = naar("/inloggen")),
@@ -12125,7 +12157,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         <section class="prijs student" id="studentprijs" aria-labelledby="h-student-prijs"><h3 id="h-student-prijs">Student</h3>
           <p class="bedrag">${euro(PLANNEN.find((p) => p.id === "student").prijs)} <span>\xE9\xE9n keer</span></p>
           <p class="periode-pil">Geen abonnement</p>
-          <p class="hint">Voor uw hele studie, tot vijf jaar. Minder dan \xE9\xE9n maand Pro.</p>
+          <p class="hint">E\xE9n keer betalen, zolang u student bent.</p>
           <ul><li>Alles van Pro</li><li>Hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Bevestigen met uw studentenmail</li><li>Na de studie de gewone prijs</li></ul>
           <div class="prijs-voet" id="studentflow"></div></section>
       </div>
@@ -12535,7 +12567,7 @@ const tipHtml = (tip, knop = !0) =>
     "Kan ik Pro opzeggen?":
       "Ja, maandelijks. Uw ploegen en bewaarde trainingen blijven staan.",
     "Hoe werkt de studentenprijs?":
-      "U maakt een account met uw gewone e-mail. Daarna bevestigt u met de e-mail van uw hogeschool of universiteit in Belgi\xEB of Nederland: u krijgt een code. U betaalt \xE9\xE9n keer \u20AC 10 en hebt Pro tijdens uw studie, tot vijf jaar. Elk jaar bevestigt u opnieuw met een nieuwe code.",
+      "U maakt een account met uw gewone e-mail. Daarna bevestigt u met de e-mail van uw hogeschool of universiteit in Belgi\xEB of Nederland: u krijgt een code. U betaalt \xE9\xE9n keer \u20AC 10 en hebt Pro zolang u student bent. Elk jaar bevestigt u opnieuw met een nieuwe code.",
     "Hoe laat ik spelers bewegen?":
       'Zet alles klaar in stap 1. Tik op "Stap toevoegen", sleep de spelers naar hun nieuwe plek en tik op "Afspelen".',
     "Welke bestanden kan ik importeren?":
@@ -13372,7 +13404,6 @@ async function studentBlok() {
       ...state.student,
       status: "actief",
       betaald: !0,
-      eind: new Date(Date.now() + 5 * 365 * 864e5).toISOString(),
     }),
       (state.pro = !0),
       save(),
