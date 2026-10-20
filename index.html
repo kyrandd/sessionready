@@ -1,4 +1,13 @@
-<!doctype html><html lang="nl" class="sr-site"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>SessionReady: uw jeugdtraining in één minuut</title><meta name="description" content="SessionReady maakt in één minuut een volledige training voor uw jeugdploeg, op maat van uw spelers, materiaal en veld. Voor jeugdtrainers in België en Nederland."><meta name="theme-color" content="#0f3b28"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><script>window.SR_SITE=1</script><style>body{margin:0;background:#fff}</style></head><body>
+<!doctype html><html lang="nl" class="sr-site"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f3b28">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<title>SessionReady: uw jeugdtraining in één minuut</title><meta name="description" content="Een volledige voetbaltraining voor uw jeugdploeg in één minuut, op maat van uw spelers, materiaal en veld. Voor jeugdtrainers U6 tot U13 in België en Nederland.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SessionReady"><meta property="og:locale" content="nl_BE">
+<meta property="og:title" content="SessionReady: uw jeugdtraining in één minuut"><meta property="og:description" content="Een volledige voetbaltraining voor uw jeugdploeg in één minuut, op maat van uw spelers, materiaal en veld. Voor jeugdtrainers U6 tot U13 in België en Nederland."><meta property="og:url" content="https://www.sessionready.be/">
+<meta property="og:image" content="https://www.sessionready.be/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://www.sessionready.be/">
+<script>window.SR_SITE=1</script><style>body{margin:0;background:#fff}</style></head><body>
 <meta charset="utf-8">
 <title>SessionReady</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%230f3b28%22/%3E%3Cg%20transform%3D%22translate%2832%2035%29%20scale%281.1%29%20translate%28-32%20-35%29%20translate%28-3%204%29%20rotate%28-20%2032%2034%29%20translate%282%203%29%22%3E%3Cpath%20d%3D%22M12%2027.5L30%2024.5A13%2013%200%201%201%2026.5%2044L12%2037.5Q9.5%2037%209.5%2034.5V30.5Q9.5%2028%2012%2027.5Z%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M27%2024.8L33.5%2023.6%22%20stroke%3D%22%230f3b28%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2239%22%20cy%3D%2237.5%22%20r%3D%225.4%22%20fill%3D%22%23f47a20%22/%3E%3Cpath%20d%3D%22M39%2034.69l2.70%201.94-1.03%203.13h-3.35l-1.03-3.13z%22%20fill%3D%22%230f3b28%22%20opacity%3D%22.9%22/%3E%3C/g%3E%3Cpath%20d%3D%22M44%2015l2.6-5.8M49.5%2019.5l5.8-3.2M51.5%2026.5l6.3-.5%22%20stroke%3D%22%23f47a20%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
@@ -174,6 +183,31 @@
 .voet-bedrijf{flex-basis:100%;font-size:13.5px}
 .sr-site .banner{display:none!important}
 .opent{text-align:center;align-items:center}
+/* telefoon: niets buiten het scherm */
+@media (max-width:959px){.hero-in{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:960px){.hero-in{grid-template-columns:minmax(0,1fr) 28rem}}
+.hero-in>*{min-width:0}
+@media (max-width:520px){.demo-rij.twee{grid-template-columns:minmax(0,1fr);gap:12px}}
+.demo-rij.twee>div{min-width:0}
+.demo-rij.twee .seg{display:flex;flex-wrap:nowrap;max-width:100%}
+.demo-rij.twee .seg>button{flex:1 1 0;min-width:0;padding-inline:4px}
+.demo-rij .wrap-seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.demo-rij .wrap-seg.leeftijd-seg{grid-template-columns:repeat(8,minmax(0,1fr))}
+@media (max-width:480px){.demo-rij .wrap-seg{grid-template-columns:repeat(2,minmax(0,1fr))}.demo-rij .wrap-seg.leeftijd-seg{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.demo-rij .wrap-seg>button{min-width:0;padding-inline:6px}
+@media (max-width:760px){.prijzen.twee{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:minmax(0,1fr);overflow:visible;margin:16px 0 0;padding:0}#prijs .prijs-hint{display:none}}
+.pf-rol .pf-optie span{overflow-wrap:normal;word-break:normal;hyphens:manual}
+@media (max-width:400px){.pf-rol{grid-template-columns:minmax(0,1fr)!important}.pf-rol .pf-optie span{font-size:15px}}
+.prijzen.koop .periode input{position:absolute;opacity:0;width:1px;height:1px}
+.prijzen.koop .periode label{position:relative;white-space:nowrap;padding:8px 10px}
+.prijzen.koop .periode label:has(input:focus-visible){outline:3px solid var(--kegel);outline-offset:2px}
+.kies-chips{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 24px),transparent);padding-right:20px}
+@media (max-width:480px){.b-menu{position:fixed;left:16px;right:16px;top:auto;bottom:calc(84px + env(safe-area-inset-bottom));min-width:0}}
+.doel-tabs{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)!important;mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)!important;padding-right:24px}
+.app-kop .kop>*{min-width:0}
+@media (max-width:400px){.app-kop .kop{gap:8px;padding-inline:12px}.app-kop .merk{font-size:1.25rem;gap:6px}.app-kop .merk svg{width:28px;height:28px}.kop-rechts .btn{padding:0 12px;font-size:14px}.app-kop .terug-knop{width:40px;height:40px;flex:none}}
+@media (max-width:400px){.app-kop .woordmerk{font-size:1.2rem}}
+@media (max-width:350px){.app-kop .woordmerk{font-size:1.05rem}.app-kop .merkteken{width:26px;height:26px}}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
