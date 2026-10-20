@@ -1,0 +1,71 @@
+@font-face{font-family:"Archivo";font-weight:400;font-display:swap;src:url(/fonts/archivo-400.woff2) format("woff2")}
+@font-face{font-family:"Archivo";font-weight:600;font-display:swap;src:url(/fonts/archivo-600.woff2) format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-weight:800;font-display:swap;src:url(/fonts/big-shoulders-display-800.woff2) format("woff2")}
+:root{--gras-diep:#0f3b28;--brand:#17633f;--kegel:#f47a20;--bg:#f4f5f3;--surface:#fff;--line:#dde2de;--ink:#14211b;--muted:#5a6760;--r:12px;--sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--cond:"Big Shoulders Display","Arial Narrow",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.55 var(--sans);color:var(--ink);background:var(--bg)}
+a{color:var(--brand)}
+img{max-width:100%}
+.wrap{max-width:72rem;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--cond);font-weight:800;line-height:1.02;margin:0 0 .4em;letter-spacing:.005em}
+h1{font-size:clamp(2.6rem,7vw,4.6rem)}
+h2{font-size:clamp(1.9rem,4vw,2.6rem)}
+h3{font-size:1.45rem}
+.nav{background:var(--gras-diep);color:#fff}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.merk{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:800 1.7rem var(--cond)}
+.merk b{font:inherit}.merk span{color:#ffb37a}
+.merk img{width:34px;height:34px}
+.nav-links{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:var(--r);border:1px solid transparent;font:600 16px var(--sans);text-decoration:none;cursor:pointer}
+.btn.oranje{background:var(--kegel);color:var(--gras-diep)}
+.btn.licht{border-color:#ffffff59;color:#fff;background:none}
+.btn.groen{background:var(--brand);color:#fff}
+.btn:focus-visible{outline:3px solid #ffb37a;outline-offset:2px}
+.hero{background:radial-gradient(120% 90% at 0% 0%,#1d6b45 0%,var(--gras-diep) 55%,#0a2b1d 100%);color:#fff;padding:56px 0 72px}
+.hero .wrap{display:grid;gap:36px;align-items:center}
+@media (min-width:900px){.hero .wrap{grid-template-columns:1.1fr .9fr}}
+.voor{font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#ffb37a;margin:0 0 12px}
+.lead{font-size:1.15rem;color:#d6e8dc;max-width:36rem}
+.acties{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-kaart{background:#fff;color:var(--ink);border-radius:18px;padding:18px;box-shadow:0 30px 60px -24px #000a}
+.hero-kaart ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.hero-kaart li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:8px 10px;border-radius:10px;background:#f4f7f5}
+.hero-kaart li b{font:800 1.05rem var(--cond);color:var(--brand)}
+.hero-kaart li span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.hero-kaart .wed{background:#fff1e3}
+.hero-kaart .wed b{color:#9a4a0c}
+section.blok{padding:64px 0}
+.grid{display:grid;gap:16px}
+@media (min-width:760px){.grid.drie{grid-template-columns:repeat(3,1fr)}.grid.twee{grid-template-columns:repeat(2,1fr)}}
+.kaart{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.kaart p{margin:0;color:var(--muted)}
+.kaart.prijs .bedrag{font:800 2.6rem var(--cond);margin:4px 0;color:var(--ink)}
+.prijs .bedrag small{font:400 1rem var(--sans);color:var(--muted)}
+.prijs ul{padding-left:18px;margin:10px 0 0;color:var(--muted)}
+.prijs.uit{border:2px solid var(--brand)}
+.lijst-vink{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.lijst-vink li{padding-left:28px;position:relative}
+.lijst-vink li:before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;background:var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.inschrijf{background:var(--gras-diep);color:#fff}
+.inschrijf .kaart{color:var(--ink)}
+form{display:grid;gap:14px}
+label{font-weight:600;display:grid;gap:6px}
+input,select{min-height:46px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;background:#fff;width:100%}
+.rij{display:grid;gap:14px}
+@media (min-width:640px){.rij{grid-template-columns:1fr 1fr}}
+.vink{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14.5px}
+.vink input{width:20px;min-height:20px;margin-top:3px;flex:none;accent-color:var(--brand)}
+.melding{margin:0;font-weight:600}
+.melding.ok{color:var(--brand)}
+.melding.fout{color:#b42318}
+footer{padding:32px 0 48px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+.juridisch main{padding:40px 0 64px}
+.juridisch .kaart{max-width:46rem}
+.juridisch dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:0}
+.juridisch dt{font-weight:600}
+.juridisch dd{margin:0}
+.juridisch h2{margin-top:28px}
+@media (max-width:520px){.nav .btn.licht{display:none}.juridisch dl{grid-template-columns:1fr}.juridisch dd{margin-bottom:8px}}
