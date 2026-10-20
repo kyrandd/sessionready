@@ -1,8 +1,6 @@
 # sessionready.be
 
-Tijdelijke website van SessionReady: startpagina, demo, inschrijving als tester, bedrijfsgegevens.
-Wordt later vervangen door de echte app.
+Website van SessionReady. Tot de echte app online staat, toont de site de app zelf als voorbeeld: alles wat een bezoeker doet, blijft in zijn eigen browser.
 
-- `index.html` startpagina, `demo.html` de klikbare demo, `juridisch.html` bedrijfsgegevens en privacy.
-- `api/aanmelden.js` inschrijving (Vercel-functie, mailt via Brevo).
-- Omgevingsvariabelen in Vercel: `BREVO_API_KEY`, `MAIL_AFZENDER`, `MELDING_NAAR`.
+- `index.html` de app (gebouwd uit het voorbeeld, één bestand).
+- `juridisch.html` bedrijfsgegevens en privacy, met `stijl.css` en `fonts/`.
