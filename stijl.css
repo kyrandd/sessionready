@@ -69,3 +69,4 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-betw
 .juridisch dd{margin:0}
 .juridisch h2{margin-top:28px}
 @media (max-width:520px){.nav .btn.licht{display:none}.juridisch dl{grid-template-columns:1fr}.juridisch dd{margin-bottom:8px}}
+.grid.prijzen{max-width:52rem}

@@ -1,4 +1,4 @@
-<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>body{margin:0;background:#fff}</style></head><body>
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>SessionReady demo</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><style>body{margin:0;background:#fff}</style></head><body>
 <meta charset="utf-8">
 <title>SessionReady</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%230f3b28%22/%3E%3Cg%20transform%3D%22translate%2832%2035%29%20scale%281.1%29%20translate%28-32%20-35%29%20translate%28-3%204%29%20rotate%28-20%2032%2034%29%20translate%282%203%29%22%3E%3Cpath%20d%3D%22M12%2027.5L30%2024.5A13%2013%200%201%201%2026.5%2044L12%2037.5Q9.5%2037%209.5%2034.5V30.5Q9.5%2028%2012%2027.5Z%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M27%2024.8L33.5%2023.6%22%20stroke%3D%22%230f3b28%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%2239%22%20cy%3D%2237.5%22%20r%3D%225.4%22%20fill%3D%22%23f47a20%22/%3E%3Cpath%20d%3D%22M39%2034.69l2.70%201.94-1.03%203.13h-3.35l-1.03-3.13z%22%20fill%3D%22%230f3b28%22%20opacity%3D%22.9%22/%3E%3C/g%3E%3Cpath%20d%3D%22M44%2015l2.6-5.8M49.5%2019.5l5.8-3.2M51.5%2026.5l6.3-.5%22%20stroke%3D%22%23f47a20%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
@@ -152,6 +152,20 @@
 .pf-links{font-size:13px;opacity:.75;margin:0}
 @media (max-width:420px){.pf-rol .pf-optie span{font-size:13.5px}}
 .vink.pf-veld{flex-direction:row;align-items:flex-start;gap:10px}.vink.pf-veld input{margin-top:3px;flex:none}.pf-rol .pf-optie span{font-size:14px;padding:0 4px;overflow-wrap:anywhere}@media (max-width:420px){.pf-rol .pf-optie span{font-size:12.5px}}
+/* prijzen: alleen voor trainers, twee gelijke kaarten */
+@media (min-width:761px){.prijzen.twee{grid-template-columns:repeat(2,minmax(0,1fr));max-width:56rem}}
+@media (max-width:760px){.prijzen.koop{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:1fr;overflow:visible;margin:0;padding:0}}
+.prijzen.koop{align-items:stretch}
+.prijzen.koop .prijs{gap:12px}
+.prijzen.koop .bedrag span{white-space:nowrap}
+.prijs-voet{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:6px}
+.prijs-voet .btn{margin-top:0;width:100%}
+.prijzen.koop .periode{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.prijzen.koop .periode label{justify-content:center;margin:0}
+.periode-pil{display:flex;align-items:center;justify-content:center;min-height:44px;margin:0;border:1px dashed var(--brand);border-radius:12px;font-weight:600;color:var(--brand)}
+.prijzen.koop .student-rij{display:flex;flex-direction:column;gap:8px}
+.prijzen.koop .student-rij input{flex:0 0 auto;width:100%;min-height:46px}
+.prijzen.koop .student-rij .btn{width:100%}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -2945,30 +2959,6 @@ const MAT_ICOON = {
       prijs: 59,
       periode: "seizoen",
       trainers: 1,
-    },
-    {
-      id: "club_s",
-      soort: "club",
-      naam: "Club S",
-      prijs: 249,
-      periode: "seizoen",
-      trainers: 10,
-    },
-    {
-      id: "club_m",
-      soort: "club",
-      naam: "Club M",
-      prijs: 449,
-      periode: "seizoen",
-      trainers: 25,
-    },
-    {
-      id: "club_l",
-      soort: "club",
-      naam: "Club L",
-      prijs: 699,
-      periode: "seizoen",
-      trainers: 50,
     },
     {
       id: "student",
@@ -11565,11 +11555,11 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       </section>
 
       <section class="sectie" id="prijs" aria-labelledby="h-prijs">
-        <h2 id="h-prijs">E\xE9n abonnement, alles erin</h2><p class="prijs-hint">Veeg voor de studentenprijs en de clublicentie.</p>
-        <div class="prijzen">
+        <h2 id="h-prijs">E\xE9n abonnement, alles erin</h2><p class="prijs-hint">Veeg voor de studentenprijs.</p>
+        <div class="prijzen twee">
           <div class="prijs pro"><h3>Pro</h3><p class="bedrag">\u20AC 4,92 <span>per maand</span></p><p class="hint">\u20AC 59 per seizoen, \xE9\xE9n keer per 12 maanden betaald. Liever per maand betalen? \u20AC 6,99, maandelijks opzegbaar.</p><ul><li>Een volledige training in een minuut, op maat van uw ploeg</li><li>De hele bibliotheek met animaties, in vier niveaus</li><li>Onbeperkt trainingen, 3D, afdrukken en video</li><li>Altijd op te zeggen, uw trainingen blijven bewaard</li></ul><button class="btn kegel" id="a4">Begin met SessionReady</button></div>
           <div class="prijs student"><span class="prijs-lint">Voor studenten</span><h3>Student</h3><p class="bedrag">\u20AC 10 <span>\xE9\xE9n keer</span></p><p class="hint">Voor uw hele studie, tot vijf jaar: minder dan \u20AC 0,20 per maand. Geen abonnement.</p><ul><li>Alles van Pro</li><li>Log in met uw gewone e-mail, bevestig met uw studentenmail</li><li>Voor studenten in Belgi\xEB en Nederland</li><li>Na de studie: de gewone prijs</li></ul><button class="btn main" id="a3">Ik ben student</button></div>
-          <div class="prijs"><h3>Club</h3><p class="bedrag">vanaf \u20AC 20,75 <span>per maand</span></p><p class="hint">\u20AC 249 per seizoen voor 10 trainers, \xE9\xE9n factuur voor de club.</p><ul><li>Pro voor al uw trainers, met \xE9\xE9n factuur</li><li>10, 25 of 50 trainers</li><li>Trainers sluiten aan met een clubcode</li><li>Vanaf \u20AC 14 per trainer per seizoen</li></ul><button class="btn alt" id="a5">Bekijk de clublicentie</button></div>
+          
         </div>
         <p class="student-regel">Eerst zien hoe het werkt? <button class="link" data-naar="demo-uitleg">Probeer de demo bovenaan</button>: u stelt een echte training samen, zonder account.</p>
       </section>
@@ -11667,16 +11657,15 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <details><summary>Kan ik het eerst proberen?</summary><p>Ja. Met de demo bovenaan deze pagina stelt u een echte training samen met oefeningen uit de bibliotheek, zonder account.</p></details>
           <details><summary>Wat kost het per maand?</summary><p>\u20AC 4,92 per maand als u per seizoen betaalt (\u20AC 59 voor twaalf maanden), of \u20AC 6,99 per maand als u maandelijks wilt kunnen opzeggen. De btw is inbegrepen.</p></details>
           <details><summary>Hoe werkt de studentenkorting?</summary><p>U maakt een account met uw gewone e-mail en bevestigt daarna uw studentenmail van een hogeschool of universiteit in Belgi\xEB of Nederland met een code. U betaalt \u20AC 10, \xE9\xE9n keer, voor uw hele studie (tot vijf jaar).</p></details>
-          <details><summary>Kan mijn club betalen voor alle trainers?</summary><p>Ja. Met een clublicentie krijgen 10, 25 of 50 trainers Pro, met \xE9\xE9n factuur voor de club. De trainers sluiten aan met een clubcode.</p></details>
           <details><summary>Kan ik Pro opzeggen?</summary><p>Ja, op elk moment. Uw ploegen en bewaarde trainingen blijven staan, ook als u later opnieuw begint.</p></details>
-          <details><summary>Kan ik mijn aankoop herroepen?</summary><p>Ja. Binnen 14 dagen na de aankoop kunt u zonder reden afzien van Pro of de studentenprijs. Omdat Pro meteen start, betaalt u dan alleen voor de dagen dat u het al gebruikte; de rest krijgt u binnen 14 dagen terug. Een clublicentie is een aankoop van een vereniging en valt niet onder dit recht voor consumenten.</p></details>
+          <details><summary>Kan ik mijn aankoop herroepen?</summary><p>Ja. Binnen 14 dagen na de aankoop kunt u zonder reden afzien van Pro of de studentenprijs. Omdat Pro meteen start, betaalt u dan alleen voor de dagen dat u het al gebruikte; de rest krijgt u binnen 14 dagen terug.</p></details>
         </div>
       </section>
 
       <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Uw volgende training staat klaar voor u naar het veld vertrekt.</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
     </main>
     <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${PUBLIEK ? '<a class="link" href="/privacy">Privacy</a><a class="link" href="/voorwaarden">Voorwaarden</a>' : ""}</footer>`;
-    for (const id of ["a", "a0", "a2", "a4", "a5"])
+    for (const id of ["a", "a0", "a2", "a4"])
       document.getElementById(id).onclick = () => go("account", "registreren");
     (a3.onclick = () => {
       (state.wilStudent = !0), save(), go("account", "registreren");
@@ -11742,7 +11731,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       const naar = (url) => () => {
         location.href = url;
       };
-      for (const id of ["a", "a0", "a2", "a4", "a5", "obord", "obib"])
+      for (const id of ["a", "a0", "a2", "a4", "obord", "obib"])
         document.getElementById(id).onclick = naar("/registreren");
       (a3.onclick = naar("/registreren")),
         (b.onclick = naar("/inloggen")),
@@ -12057,8 +12046,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       });
   },
   pro(focus) {
-    const clubPlannen = PLANNEN.filter((p) => p.soort === "club"),
-      kanBetalen = (id) => !!prijsId(id),
+    const kanBetalen = (id) => !!prijsId(id),
       geenBetaling =
         'In dit voorbeeld kunt u niet betalen. Gebruik bovenaan "Bekijk als Pro" om Pro te bekijken.',
       viaClub = ECHT?.club?.licentie && !ECHT?.eigenPro,
@@ -12070,51 +12058,37 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       ${eerste && !state.klaar ? stappen(4) : ""}
       <div class="pro-kop"><h1 class="big" tabindex="-1">${eerste ? "Nog \xE9\xE9n stap: uw abonnement" : "Uw abonnement"}</h1>
         <p class="lead-klein">${eerste ? `${state.ploegen[0] ? `${esc(state.ploegen[0].naam)} staat klaar. ` : ""}Kies hoe u betaalt en maak meteen uw eerste training.` : "Alles van SessionReady zit in \xE9\xE9n abonnement."}</p></div>
-      <section class="col" aria-labelledby="h-tr-prijs"><h2 id="h-tr-prijs">Voor een trainer</h2>
-      <div class="prijzen een" style="margin-top:8px">
-        <section class="prijs pro"><h3>Pro</h3>
+      <div class="prijzen twee koop" style="margin-top:8px">
+        <section class="prijs pro" aria-labelledby="h-pro"><h3 id="h-pro">Pro</h3>
+          <p class="bedrag" id="probedrag">\u20AC 59 <span>per seizoen</span></p>
           <div class="periode" role="radiogroup" aria-label="Betaalperiode">
-            <label><input type="radio" name="per" value="seizoen" checked> <span><strong>\u20AC 4,92</strong> per maand <small>\u20AC 59 per seizoen</small></span></label>
-            <label><input type="radio" name="per" value="maand"> <span><strong>\u20AC 6,99</strong> per maand <small>maandelijks opzegbaar</small></span></label>
+            <label><input type="radio" name="per" value="seizoen" checked> <span>Per seizoen</span></label>
+            <label><input type="radio" name="per" value="maand"> <span>Per maand</span></label>
           </div>
-          <p class="hint" id="perhint">\u20AC 59 voor twaalf maanden Pro, in \xE9\xE9n keer. U betaalt \u20AC 24,88 minder dan twaalf keer per maand.</p>
-          <ul><li>Een volledige training in een minuut, op maat van uw ploeg</li><li>De hele bibliotheek met animaties, in vier niveaus</li><li>Onbeperkt trainingen, 3D, afdrukken en video</li><li>Coach Kiki denkt mee</li></ul>
-          ${proStatus || `<div class="herroep"><label class="vink"><input type="checkbox" class="herroep-ok"><span>Ik wil dat Pro meteen start. Ik weet dat ik binnen 14 dagen na de aankoop zonder reden kan herroepen en dat ik dan alleen betaal voor de dagen dat ik Pro al gebruikte.</span></label><p class="hint">Herroepen doet u met een mailtje of via ${ECHT ? '<a href="/voorwaarden#herroeping" target="_blank" rel="noopener">het herroepingsformulier in de voorwaarden</a>' : "het herroepingsformulier in de voorwaarden"}. U krijgt uw geld binnen 14 dagen terug.</p></div><button class="btn kegel" id="bkoop" ${ECHT?.paddle ? "" : "disabled"} aria-describedby="bp">Word Pro</button><p class="hint" id="bp">${ECHT?.paddle ? "Veilig betalen via Paddle. De btw is inbegrepen en wordt voor u afgedragen." : geenBetaling}</p>`}</section>
-      </div></section>
-      <section class="col" id="studentprijs" aria-labelledby="h-student-prijs"><h2 id="h-student-prijs">Voor studenten</h2>
-        <div class="prijs student-prijs"><div><h3>Student</h3><p class="bedrag">${euro(PLANNEN.find((p) => p.id === "student").prijs)} <span>\xE9\xE9n keer</span></p><p class="hint">Dat is minder dan \xE9\xE9n maand Pro.</p>
-          <ul><li>Alles van Pro, tijdens uw hele studie (tot vijf jaar)</li><li>Voor studenten van een hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Uw account blijft op uw gewone e-mail; de studentenmail dient alleen om te bevestigen</li><li>Elk jaar bevestigen met een nieuwe code; na de studie de gewone prijs</li></ul></div>
-          <div id="studentflow" class="col" style="gap:8px"></div></div>
-      </section>
-      <section class="col" id="clubprijs" aria-labelledby="h-club-prijs"><h2 id="h-club-prijs">Voor een club</h2>
-        <p class="muted">E\xE9n licentie per seizoen: al uw trainers krijgen Pro, de club krijgt \xE9\xE9n factuur. U ontvangt een clubcode; elke trainer vult die code in bij "Mijn club". Een trainer die vertrekt, maakt zijn plaats vrij voor een ander.</p>
-        <div class="prijzen clubprijzen" style="margin-top:8px">
-          ${clubPlannen.map((p) => `<label class="prijs clubplan"><input type="radio" name="clubplan" value="${p.id}" ${p.id === "club_m" ? "checked" : ""}><h3>${p.naam}</h3><p class="bedrag">${euro(p.prijs)} <span>per seizoen</span></p><ul><li>Tot ${p.trainers} trainers met Pro</li><li>${euro(Math.round((p.prijs / p.trainers) * 100) / 100)} per trainer per seizoen</li></ul></label>`).join("")}
-        </div>
-        ${
-          ECHT?.club?.licentie
-            ? `<p class="hint"><strong>Uw club ${esc(ECHT.club.naam)} heeft een licentie.</strong> De code, de plaatsen en de trainers vindt u bij "Mijn club".</p><div><button class="btn alt" id="naarclub">Naar mijn club</button></div>`
-            : ECHT?.club && !ECHT.club.eigenaar
-              ? `<p class="hint">U bent lid van ${esc(ECHT.club.naam)}. Alleen de eigenaar van de club kan een licentie nemen; dan krijgt u Pro zonder zelf te betalen.</p>`
-              : `
-        <div class="col" style="gap:8px;max-width:28rem"><div class="field">
-          <label for="clubnaam">Naam van de club</label><input type="text" id="clubnaam" maxlength="80" autocomplete="organization" placeholder="Bijvoorbeeld KFC Voorbeeld" value="${esc(ECHT?.club?.naam || state.profiel?.club || "")}" ${ECHT?.club?.eigenaar ? "readonly" : ""}></div>
-          <button class="btn main" id="bclub" ${ECHT?.paddle ? "" : "disabled"} aria-describedby="bcp">Koop de clublicentie</button>
-          <p class="hint" id="bcp" role="status">${ECHT?.paddle ? "Bij het betalen kunt u het btw-nummer van de club invullen, zodat de factuur op naam van de club staat." : geenBetaling}</p>
-        </div>`
-        }
-        <p class="hint">Hebt u al een clubcode? <button class="link" id="naarcode">Sluit aan bij uw club</button></p>
-      </section>
+          <p class="hint" id="perhint">Dat is \u20AC 4,92 per maand, in \xE9\xE9n keer betaald.</p>
+          <ul><li>Een volledige training in een minuut</li><li>De hele bibliotheek met animaties</li><li>Onbeperkt trainingen, 3D, afdrukken en video</li><li>Coach Kiki denkt mee</li></ul>
+          <div class="prijs-voet">${proStatus || `<div class="herroep"><label class="vink"><input type="checkbox" class="herroep-ok"><span>Ik wil dat Pro meteen start. Ik weet dat ik binnen 14 dagen kan herroepen en dan alleen betaal voor de dagen dat ik Pro al gebruikte.</span></label></div><button class="btn kegel" id="bkoop" ${ECHT?.paddle ? "" : "disabled"} aria-describedby="bp">Word Pro</button><p class="hint" id="bp">${ECHT?.paddle ? "Veilig betalen via Paddle, btw inbegrepen." : geenBetaling}</p>`}</div></section>
+        <section class="prijs student" id="studentprijs" aria-labelledby="h-student-prijs"><h3 id="h-student-prijs">Student</h3>
+          <p class="bedrag">${euro(PLANNEN.find((p) => p.id === "student").prijs)} <span>\xE9\xE9n keer</span></p>
+          <p class="periode-pil">Geen abonnement</p>
+          <p class="hint">Voor uw hele studie, tot vijf jaar. Minder dan \xE9\xE9n maand Pro.</p>
+          <ul><li>Alles van Pro</li><li>Hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Bevestigen met uw studentenmail</li><li>Na de studie de gewone prijs</li></ul>
+          <div class="prijs-voet" id="studentflow"></div></section>
+      </div>
+      <p class="hint">Herroepen doet u met een mailtje of via ${ECHT ? '<a href="/voorwaarden#herroeping" target="_blank" rel="noopener">het herroepingsformulier in de voorwaarden</a>' : "het herroepingsformulier in de voorwaarden"}. U krijgt uw geld binnen 14 dagen terug.</p>
       ${eerste ? '<p class="hint">Eerst rondkijken? <button class="link" id="naardemo">Bekijk de demo op de startpagina</button></p>' : '<button class="btn alt" id="terug">Terug naar start</button>'}</div></main>`;
     const per = () =>
       app.querySelector('input[name="per"]:checked')?.value || "seizoen";
     app.querySelectorAll('input[name="per"]').forEach(
       (r) =>
         (r.onchange = () => {
-          perhint.textContent =
-            per() === "seizoen"
-              ? "\u20AC 59 voor twaalf maanden Pro, in \xE9\xE9n keer. U betaalt \u20AC 24,88 minder dan twaalf keer per maand."
-              : "Maandelijks opzegbaar.";
+          const s2 = per() === "seizoen";
+          (probedrag.innerHTML = s2
+            ? "\u20AC 59 <span>per seizoen</span>"
+            : "\u20AC 6,99 <span>per maand</span>"),
+            (perhint.textContent = s2
+              ? "Dat is \u20AC 4,92 per maand, in \xE9\xE9n keer betaald."
+              : "Maandelijks opzegbaar.");
         }),
     ),
       document
@@ -12138,25 +12112,6 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       document
         .getElementById("naarclub")
         ?.addEventListener("click", () => go("club")),
-      (document.getElementById("naarcode").onclick = () => go("club")),
-      document.getElementById("bclub")?.addEventListener("click", () => {
-        const naam2 = clubnaam.value.trim(),
-          plan = app.querySelector('input[name="clubplan"]:checked')?.value;
-        if (naam2.length < 2) {
-          (bcp.textContent = "Vul de naam van de club in."), clubnaam.focus();
-          return;
-        }
-        if (!kanBetalen(plan)) {
-          bcp.textContent = "Deze clublicentie is nog niet beschikbaar.";
-          return;
-        }
-        koopPro(plan, naam2);
-      }),
-      focus === "club" &&
-        setTimeout(
-          () => document.getElementById("clubprijs")?.scrollIntoView(),
-          0,
-        ),
       studentBlok(),
       (focus === "student" || state.wilStudent) &&
         setTimeout(
@@ -12508,7 +12463,7 @@ const tipHtml = (tip, knop = !0) =>
     "Wat doet deze app?":
       "U kiest een leerdoel, en de app stelt een volledige training samen voor uw ploeg: van opwarming tot de wedstrijd op het einde, passend bij uw spelers, materiaal en tijd.",
     "Wat kost het?":
-      "Pro kost \u20AC 4,92 per maand als u per seizoen betaalt (\u20AC 59), of \u20AC 6,99 per maand, maandelijks opzegbaar. Studenten betalen \u20AC 10, \xE9\xE9n keer, voor hun hele studie. Een club neemt een licentie vanaf \u20AC 249 per seizoen.",
+      "Pro kost \u20AC 4,92 per maand als u per seizoen betaalt (\u20AC 59), of \u20AC 6,99 per maand, maandelijks opzegbaar. Studenten betalen \u20AC 10, \xE9\xE9n keer, voor hun hele studie.",
     "Waarom een code in plaats van een wachtwoord?":
       "Een code is elke keer nieuw en werkt maar een kwartier. Er is geen wachtwoord dat u kunt vergeten of dat ergens anders uitlekt. Wie uw code wil, heeft uw mailbox nodig.",
     "Is mijn account veilig?":
@@ -12955,19 +12910,9 @@ ${
   );
 }
 function licentieSectie() {
-  return `<section class="col" aria-labelledby="h-lic"><h2 id="h-lic">Clublicentie</h2><div class="licentie" id="licentie" aria-live="polite">${
-    ECHT
-      ? '<p class="muted">Even laden\u2026</p>'
-      : `<p>Met een clublicentie heeft elke trainer van de club Pro. De club betaalt \xE9\xE9n keer per seizoen en krijgt een clubcode; elke trainer vult die code hier in.</p>
-       <div class="codeveld"><label class="sr-only" for="ccode">Clubcode</label><input type="text" id="ccode" placeholder="Clubcode" disabled><button class="btn alt" disabled>Aansluiten</button></div>
-       <p class="hint">In dit voorbeeld kunt u niet aansluiten.</p><div><button class="btn alt" id="licprijs">Bekijk de prijzen voor clubs</button></div>`
-  }</div></section>`;
+  return "";
 }
-function vulLicentie() {
-  document
-    .getElementById("licprijs")
-    ?.addEventListener("click", () => go("pro", "club"));
-}
+function vulLicentie() {}
 {
   let vorigeY = window.scrollY,
     terugTimer = null;
@@ -13104,12 +13049,12 @@ async function clubEcht() {
     (clubApi("PATCH", "/api/club", { kaart }), (ik.kaart = kaart));
   const licentieTekst = c.licentie
       ? `Clublicentie actief${c.tot ? ` tot ${new Date(c.tot).toLocaleDateString("nl-BE")}` : ""}: ${Math.min(c.aantal, c.plaatsen)} van de ${c.plaatsen} plaatsen met Pro zijn bezet.${c.aantal > c.plaatsen ? ` ${c.aantal - c.plaatsen} ${c.aantal - c.plaatsen === 1 ? "lid heeft" : "leden hebben"} geen Pro-plaats.` : ""}`
-      : "Gratis club. Met een clublicentie krijgen uw trainers Pro, met \xE9\xE9n factuur voor de club.",
+      : "",
     oef = oj?.oefeningen || [],
     link = location.origin + "/registreren";
   zet(`<main class="wrap wider">
     <div class="col"><h1 class="big" tabindex="-1">${esc(c.naam)}</h1><p class="muted">${c.aantal} ${c.aantal === 1 ? "trainer" : "trainers"}. ${esc(licentieTekst)}</p>
-      ${c.eigenaar && !c.licentie ? '<div><button class="btn alt" id="clic">Uw club een licentie geven</button></div>' : ""}${c.eigenaar && c.beheerUrl ? `<p><a href="${esc(c.beheerUrl)}" target="_blank" rel="noopener">Licentie beheren of opzeggen</a></p>` : ""}</div>
+      ${c.eigenaar && c.beheerUrl ? `<p><a href="${esc(c.beheerUrl)}" target="_blank" rel="noopener">Licentie beheren of opzeggen</a></p>` : ""}</div>
     <section class="uitnodig"><div><strong>Collega's uitnodigen</strong><p class="muted">Geef hen de clubcode. Ze maken een account aan en vullen de code in bij "Mijn club".</p>
       <p>Clubcode: <span class="code-groot">${esc(c.code)}</span></p></div>
       <div class="col" style="gap:8px"><button class="btn main" id="ckop">Kopieer uitnodiging</button>${c.eigenaar ? '<button class="btn alt" id="cnieuw">Nieuwe code</button>' : ""}</div></section>
@@ -13359,7 +13304,7 @@ async function studentBlok() {
           : status === "afgelopen"
             ? '<p class="hint">Uw studentenkorting is afgelopen. Kies hierboven Pro voor een trainer.</p>'
             : mailStap(
-                "Vul de e-mail van uw hogeschool of universiteit in (Belgi\xEB of Nederland). U krijgt er een code van zes cijfers; uw account blijft op uw gewone e-mail.",
+                "Vul uw studentenmail in. U krijgt er een code van zes cijfers; uw account blijft op uw gewone e-mail.",
               )),
     el.insertAdjacentHTML(
       "beforeend",
