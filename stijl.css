@@ -73,3 +73,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-betw
 .model{border:1px dashed var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
 .juridisch ul{color:var(--muted)}
 .juridisch p,.juridisch dd,.juridisch li{overflow-wrap:anywhere}
+.juridisch h3{margin-top:20px;font-size:1.3rem}
+.juridisch .kaart ul{color:var(--muted);padding-left:20px;margin:8px 0}
+.juridisch .kaart li{margin:5px 0}
+.juridisch .kaart p+p{margin-top:10px}
