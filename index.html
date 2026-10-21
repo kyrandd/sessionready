@@ -12057,7 +12057,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
                 ([k, d]) =>
                   `<button role="radio" data-k="doel" data-v="${k}">${d.kort}</button>`,
               )
-              .join("")}</div><p class="doel-meer">In de app kiest u uit ${LEERDOEL_LIJST.length} leerdoelen, zoals samenspel met de derde man, het 1 tegen 1, flankspel, opbouwen van achteruit en meteen druk na balverlies.</p></div>
+              .join("")}</div><p class="doel-meer">In de app kiest u uit nog veel meer leerdoelen. U kunt Coach Kiki ook gewoon vragen wat u wilt bereiken.</p></div>
             <div class="demo-rij twee">
               <div><span class="demo-lab" id="dl-s">Spelers</span><div class="stapper" aria-labelledby="dl-s"><button id="min" aria-label="E\xE9n speler minder">\u2212</button><output id="nspelers" aria-live="polite"></output><button id="plus" aria-label="E\xE9n speler meer">+</button></div></div>
               <div><span class="demo-lab" id="dl-t">Duur</span><div class="seg" role="radiogroup" aria-labelledby="dl-t">${[60, 75, 90].map((d) => `<button role="radio" data-k="duur" data-v="${d}">${d}\u2032</button>`).join("")}</div></div>
@@ -12065,7 +12065,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           </div>
           <figure class="klembord" style="margin:0" aria-label="Uw training"><div class="fiche" id="fiche"></div></figure>
           </div>
-          <p class="demo-noot"><strong>Dit is maar een klein stukje van de app.</strong> Met een account stelt u uw eigen ploeg en materiaal in, kiest u uit meer dan 460 oefeningen met animaties in 2D en 3D, tekent u uw eigen oefeningen en neemt u de training mee naar het veld.</p>
+          <p class="demo-noot"><strong>Dit is slechts een voorproefje van de app.</strong> Met een account stelt u uw eigen ploeg en materiaal in, kiest u uit meer dan 460 oefeningen met animaties in 2D en 3D, tekent u uw eigen oefeningen en neemt u de training mee naar het veld.</p>
         </section>
       </div>
     </header>
@@ -12114,7 +12114,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       <section class="sectie toon" aria-labelledby="h-veld">
         <div class="toon-tekst">
           <h2 id="h-veld">Op het veld: uw gsm als fiche</h2>
-          <p class="lead">Grote letters, een klok per oefening en de coachpunten bij de hand. Ook leesbaar in de zon en met koude vingers.</p>
+          <p class="lead">Grote letters, een klok per oefening en de coachpunten bij de hand. Goed leesbaar in de zon en makkelijk te bedienen, ook met koude vingers.</p>
         </div>
         <div class="gsm" aria-hidden="true"><div class="gsm-in">
           <p class="gsm-fase">Oefening 3 van 5</p>
@@ -12146,10 +12146,10 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       </section>
 
       <section class="sectie" id="prijs" aria-labelledby="h-prijs">
-        <h2 id="h-prijs">E\xE9n abonnement, alles erin</h2>
+        <h2 id="h-prijs">E\xE9n abonnement, alles inbegrepen</h2>
         <div class="prijzen twee">
-          <div class="prijs pro"><h3>Pro</h3><p class="bedrag">\u20AC 59 <span>per seizoen</span></p><p class="hint">Of \u20AC 6,99 per maand, maandelijks opzegbaar.</p><ul><li>Onbeperkt trainingen voor al uw ploegen</li><li>De hele bibliotheek, in vier niveaus</li><li>3D, afdrukken en video</li><li>Coach Kiki denkt mee</li></ul><button class="btn kegel" id="a4">Begin met SessionReady</button></div>
-          <div class="prijs student"><h3>Student</h3><p class="bedrag">\u20AC 10 <span>\xE9\xE9n keer</span></p><p class="hint">E\xE9n keer betalen, zolang u student bent. Geen abonnement.</p><ul><li>Alles van Pro</li><li>Hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Bevestigen met uw studentenmail</li><li>Daarna de gewone prijs</li></ul><button class="btn main" id="a3">Ik ben student</button></div>
+          <div class="prijs pro"><h3>Pro</h3><p class="bedrag">\u20AC 59 <span>per seizoen</span></p><p class="hint">Of \u20AC 6,99 per maand, maandelijks opzegbaar.</p><ul><li>Onbeperkt trainingen maken voor al uw ploegen</li><li>De hele bibliotheek, in vier niveaus</li><li>3D, afdrukken en video</li><li>Coach Kiki denkt mee</li></ul><button class="btn kegel" id="a4">Begin met SessionReady</button></div>
+          <div class="prijs student"><h3>Student</h3><p class="bedrag">\u20AC 10 <span>\xE9\xE9n keer</span></p><p class="hint">Eenmalige betaling, geldig zolang u student bent. Geen abonnement.</p><ul><li>Alles van Pro</li><li>Hogeschool of universiteit in Belgi\xEB of Nederland</li><li>Bevestigen met uw studentenmail</li><li>Na uw studies: Pro aan het gewone tarief</li></ul><button class="btn main" id="a3">Ik ben student</button></div>
           
         </div>
       </section>
@@ -12163,7 +12163,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <details><summary>Wat als ik weinig materiaal heb?</summary><p>U vult \xE9\xE9n keer in wat u hebt. Ontbreekt er iets voor een oefening, dan staat erbij waarmee u het vervangt, bijvoorbeeld twee potjes als doeltje.</p></details>
           <details><summary>Werkt het op mijn gsm, ook op het veld?</summary><p>Ja, in de browser van uw gsm, zonder iets te installeren. U kunt de app op uw beginscherm zetten. Een training die u geopend hebt, blijft beschikbaar als het bereik aan het veld wegvalt.</p></details>
           <details><summary>Kan ik mijn eigen oefeningen toevoegen?</summary><p>Ja. Teken ze op het tekenbord, in stappen die als animatie afspelen, of laat Coach Kiki ze uit een pdf of Word-bestand overnemen. Uw eigen oefeningen ziet alleen u, tenzij u ze deelt met uw club.</p></details>
-          <details><summary>Wie maakt de oefeningen?</summary><p>Ons team van jeugdtrainers. Elke oefening is uitgeschreven met een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
+          <details><summary>Wie maakt de oefeningen?</summary><p>De oefeningen zijn uitgeschreven door een jeugdtrainer en volgen de spelvormen van Voetbal Vlaanderen en de KNVB. Elke oefening heeft een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
           <details><summary>Kan ik het eerst proberen?</summary><p>Ja, met de demo bovenaan, zonder account. De app zelf doet veel meer: uw eigen ploeg, de hele bibliotheek, het tekenbord en de fiche op het veld.</p></details>
           <details><summary>Wat kost het?</summary><p>\u20AC 59 per seizoen, voor twaalf maanden. Of \u20AC 6,99 per maand als u maandelijks wilt kunnen opzeggen. De btw is inbegrepen.</p></details>
           <details><summary>Hoe werkt de studentenkorting?</summary><p>U maakt een account met uw gewone e-mail en bevestigt daarna uw studentenmail van een hogeschool of universiteit in Belgi\xEB of Nederland met een code. U betaalt \xE9\xE9n keer \u20AC 10 en hebt Pro zolang u student bent.</p></details>
