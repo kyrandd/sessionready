@@ -281,6 +281,10 @@ body[data-scherm=account] .kiki-btn,body[data-scherm=profiel] .kiki-btn,body[dat
 .voet-bedrijf{color:var(--muted);opacity:.85}
 .hint a[href^="mailto"]{color:var(--brand);font-weight:600;text-decoration:none}
 .hint a[href^="mailto"]:hover{text-decoration:underline}
+.demo-paneel .stapper{justify-content:space-between}
+.demo-paneel .stapper output{flex:1;text-align:center}
+.voet>span:not(.voet-bedrijf){flex-basis:100%;margin-top:-4px}
+@media (max-width:520px){.voet{gap:10px 20px}}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
