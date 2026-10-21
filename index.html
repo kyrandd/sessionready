@@ -273,6 +273,12 @@ body[data-scherm=account] .kiki-btn,body[data-scherm=profiel] .kiki-btn,body[dat
 .demo-grid .demo-schets p{font-size:14px;margin:0}
 .demo-grid .fasen li button{padding-top:6px;padding-bottom:6px}
 @media (max-width:420px){.demo-grid .demo-schets{grid-template-columns:6.5rem 1fr}}
+
+.voet{border-top:1px solid var(--line);align-items:baseline;padding-top:28px}
+.voet .merk-knop{flex-basis:100%}
+.voet .link{text-decoration:none;font-weight:600}
+.voet .link:hover{color:var(--brand);text-decoration:underline}
+.voet-bedrijf{color:var(--muted);opacity:.85}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -12174,7 +12180,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
 
       <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Klaar voor uw volgende training?</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
     </main>
-    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${PUBLIEK ? '<a class="link" href="/privacy">Privacy</a><a class="link" href="/voorwaarden">Voorwaarden</a>' : '<a class="link" href="/juridisch">Bedrijfsgegevens en privacy</a><a class="link" href="/voorwaarden">Voorwaarden</a>'}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
+    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${(() => { const w = window.SR_SITE ? "" : "https://www.sessionready.be", t = window.SR_SITE ? "" : ' target="_blank" rel="noopener"'; return `<a class="link" href="${w}/juridisch"${t}>Bedrijfsgegevens en privacy</a><a class="link" href="${w}/voorwaarden"${t}>Voorwaarden</a>`; })()}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
     for (const id of ["a", "a0", "a2", "a4"])
       document.getElementById(id).onclick = () => go("account", "registreren");
     (a3.onclick = () => {
