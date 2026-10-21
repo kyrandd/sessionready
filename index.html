@@ -3850,6 +3850,13 @@ function metZaad(tekst, f2) {
     Math.random = oud;
   }
 }
+function wedstrijdVorm(leeftijd, n) {
+  const vol = Number(spelvorm(leeftijd).split(" ")[0]) || 5;
+  if (n >= vol * 2) return spelvorm(leeftijd);
+  const a = Math.floor(n / 2),
+    b = n - a;
+  return a === b ? `op training ${a} tegen ${a}` : `op training ${a} tegen ${a}, met één kameleon`;
+}
 function demoTraining({ leeftijd, doel, spelers: spelers2, duur }) {
   const ploeg = {
     id: "demo",
@@ -3891,7 +3898,7 @@ function toonDemo(anim) {
     o = nu.o,
     s = schetsVan(o),
     tip = spelersTip(o, demo.spelers) || (o.coach?.[0] ?? "");
-  (f2.innerHTML = `<div class="fiche-kop"><div><h2>${isNL() ? `JO${demo.leeftijd.slice(1)}-1` : `${demo.leeftijd} A`}</h2><p class="wanneer">Dinsdag, ${demo.duur} minuten, ${esc(spelvorm(demo.leeftijd))}</p></div><span class="tag">${demo.spelers} spelers</span></div>
+  (f2.innerHTML = `<div class="fiche-kop"><div><h2>${isNL() ? `JO${demo.leeftijd.slice(1)}-1` : `${demo.leeftijd} A`}</h2><p class="wanneer">Dinsdag, ${demo.duur} minuten, ${esc(wedstrijdVorm(demo.leeftijd, demo.spelers))}</p></div><span class="tag">${demo.spelers} spelers</span></div>
     <p class="doel">Leerdoel<strong>${esc(DOELEN[demo.doel].k)}</strong></p>
     <div class="tijdlijn${anim ? " anim" : ""}" aria-hidden="true">${fasen.map((x) => `<span class="${x === nu ? "nu" : ""}" style="flex:${x.m}"></span>`).join("")}</div>
     <ol class="fasen">${fasen.map((x, i) => `<li class="${x === nu ? "nu" : ""}"><button type="button" class="fase-knop" data-fase="${i}" aria-pressed="${x === nu}"><span class="min">${x.tijd}</span><span class="fase-t"><span class="fase-naam">${esc(x.fase)}</span>${esc(x.o.t)}</span></button></li>`).join("")}</ol>
@@ -6981,6 +6988,21 @@ function kiesVoor(
   let lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o) && past(o));
   lijst.length ||
     (lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o) && past(o), !1)),
+    lijst.length ||
+    (lijst = alleOef().filter(
+      (o) =>
+        !o.keeper &&
+        !o.zaal &&
+        !(o.tik || o.fantasie) &&
+        filter(o) &&
+        vrij(o) &&
+        past(o) &&
+        o.lft.some((l) => Math.abs(Number(l.slice(1)) - Number(ploeg.leeftijd.slice(1))) <= 3),
+    )),
+    lijst.length ||
+    (lijst = alleOef().filter(
+      (o) => !o.keeper && !o.zaal && !(o.tik || o.fantasie) && filter(o) && vrij(o) && past(o),
+    )),
     lijst.length ||
     (lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o))),
     lijst.length ||
