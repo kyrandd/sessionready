@@ -236,6 +236,31 @@
 #faq .faq details p{font-size:15px;padding-bottom:12px;margin:0}
 @media (min-width:900px){.hero-kort{padding-top:20px}.hero-kort h1{font-size:clamp(2.6rem,5vw,4rem)}}
 .gsm-balk span{transition:width 1s linear}
+/* Coach Kiki niet over formulieren en knoppen */
+body[data-scherm=account] .kiki-btn,body[data-scherm=profiel] .kiki-btn,body[data-scherm=ploeg] .kiki-btn,body[data-scherm=materiaal] .kiki-btn,body[data-scherm=klaar] .kiki-btn,body[data-scherm=pro] .kiki-btn,body[data-scherm=veld] .kiki-btn,body[data-scherm=oefening] .kiki-btn,body[data-scherm=training] .kiki-btn{display:none}
+
+/* bibliotheek: zoeken bovenaan, filters inklapbaar */
+.bib-zoekveld{margin:4px 0 2px}
+.bib-zoekveld input{min-height:50px;font-size:17px;border-radius:12px;padding-left:44px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235a6760' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") 14px center/20px no-repeat}
+.bib-filterbox{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:0 14px}
+.bib-filterbox>summary{cursor:pointer;min-height:46px;display:flex;align-items:center;gap:8px;font-weight:600;list-style:none}
+.bib-filterbox>summary::-webkit-details-marker{display:none}
+.bib-filterbox>summary:after{content:"";margin-left:auto;width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-4px}
+.bib-filterbox[open]>summary:after{transform:rotate(-135deg);margin-top:4px}
+.bib-filterbox[open]{padding-bottom:12px}
+.bib-filterbox .bib-filter{border:0;padding:0;margin:0;background:none;box-shadow:none}
+.bib-filters-tel{font-size:13px;font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:99px;padding:2px 8px}
+/* gsm: Coach Kiki in de tabbalk in plaats van een zwevende knop */
+.app-nav .nav-kiki{display:none}
+@media (max-width:760px){
+  body.met-tabbalk .kiki-btn{display:none!important}
+  .app-nav .nav-kiki{display:flex}
+  .app-nav .nav-kiki svg,.app-nav .nav-kiki img{width:24px;height:24px;border-radius:50%}
+  body.met-tabbalk .kiki-bubble,body.met-tabbalk .kiki-panel{bottom:calc(74px + env(safe-area-inset-bottom,0px));max-height:min(32rem,calc(100dvh - 150px))}
+  body.met-tabbalk #app{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
+#kzres:empty{display:none}
+.thuis-hero{grid-template-columns:minmax(0,1fr)}.thuis-hero>*{min-width:0}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -2423,7 +2448,187 @@ const EXTRA_5 = [
     "h 10,20 10,36 70,20 70,36; w 24,28; b 56,28; ba 26,28; D 26,28>46,22#1; L 56,28>50,26#1; D 46,22>70,26#2"),
 ];
 
-const ALLE_EXTRA=[...EXTRA_1,...EXTRA_2,...EXTRA_3,...EXTRA_4,...EXTRA_5];
+// Extra oefeningen, deel 6: vrijlopen voor de jongeren, dekken en rugdekking, compact verdedigen,
+// druk zetten en meteen druk na balverlies. Aangevuld na de klantentest van oktober 2026.
+const EXTRA_6 = [
+  XO("x6-vrijlopen-driehoek-3v1", "Passen en positiespel", ["U8", "U9", "U10"], [4, 16], 12, "10 x 10 m per groep",
+    "Vrijlopen in de driehoek: 3 tegen 1 met vaste hoekjes",
+    ["3 potjes per groep", "ballen", "hesjes"],
+    "Drie aanvallers in een driehoek van potjes, één verdediger in het midden.",
+    "De drie houden de bal. Wie de bal niet heeft, loopt naar een vrij potje zodat de balbezitter hem kan zien: nooit achter de verdediger staan. Na tien passes een punt. Bij verovering wisselt de verdediger met de speler die de bal verloor.",
+    ["Sta niet achter de verdediger: zoek een plek waar de bal u kan bereiken.", "Ga al lopen voor de pass vertrekt.", "Open lichaam: kijk naar de bal en naar het veld."],
+    ["De verdediger mag alleen onderscheppen, niet tackelen.", "3 tegen 1 met drie potjes.", "Vier potjes: één hoek blijft altijd leeg.", "Hoogstens twee contacten per speler."],
+    "Een rustige verdediger.", "Twee contacten.",
+    ["4 tegen 1 in een vierkant.", "Na vijf passes mag een aanvaller scoren in een doeltje.", "Wie de bal verliest, wordt verdediger."],
+    "h 40,12 22,42 58,42; w 40,14 24,40 56,40; b 40,32; ba 41,14; P 41,14>25,39#1; L 56,40>48,22#1; P 25,39>47,23#2; L 41,14>56,40#2"),
+
+  XO("x6-vrijlopen-kies-de-poort", "Passen en positiespel", ["U8", "U9", "U10", "U11"], [6, 12], 12, "25 x 20 m",
+    "Aanspeelbaar door de poortjes: 3 tegen 2 met vier poortjes",
+    ["8 potjes voor vier poortjes", "ballen", "hesjes"],
+    "Vier poortjes van 3 meter verspreid in het vak. Drie aanvallers tegen twee verdedigers.",
+    "De aanvallers scoren door een pass door een poortje naar een ploegmaat die erachter staat. De verdedigers proberen de poortjes af te sluiten. De ontvanger moet dus naar een poortje lopen dat vrij is.",
+    ["Kijk welk poortje vrij is en loop er naartoe.", "Vraag de bal met een gebaar of een roep.", "Na een punt meteen naar een ander poortje."],
+    ["Zes poortjes.", "Vier poortjes.", "Drie poortjes.", "Hetzelfde poortje mag niet twee keer na elkaar."],
+    "Meer poortjes.", "Minder poortjes.",
+    ["3 tegen 3 met een joker.", "Na een punt mag de ontvanger meteen naar een ander poortje dribbelen.", "Een punt telt dubbel als de pass in één keer doorgespeeld wordt."],
+    "h 20,10 26,10 54,10 60,10 20,46 26,46 54,46 60,46; w 30,28 50,22 44,40; b 38,26 54,32; ba 31,28; L 50,22>57,14#1; P 31,28>56,15#2; L 44,40>23,50#3"),
+
+  XO("x6-vrijlopen-4v4-neutralen", "Passen en positiespel", ["U9", "U10", "U11"], [10, 12], 15, "30 x 25 m",
+    "4 tegen 4 met twee neutralen: altijd een vrije man",
+    ["hesjes in drie kleuren", "potjes", "ballen"],
+    "Twee ploegen van vier en twee neutrale spelers in een andere kleur.",
+    "De ploeg in balbezit speelt samen met de neutralen. Acht passes na elkaar is een punt. De neutralen helpen altijd de ploeg die de bal heeft, dus er is steeds een man meer.",
+    ["Maak het veld groot: breed en diep.", "Na uw pass: meteen opnieuw vrijlopen.", "Kijk al rond voor de bal er is."],
+    ["Drie neutralen.", "Twee neutralen.", "Eén neutrale speler.", "De neutralen spelen in één contact."],
+    "Meer neutralen.", "Minder neutralen.",
+    ["Scoren in twee kleine doeltjes na vijf passes.", "Een punt na een pass door de lijn van twee tegenstanders.", "De neutralen mogen alleen op de zijlijn."],
+    "h 10,10 70,10 10,46 70,46; w 20,16 20,40 40,30 56,14; b 30,24 46,20 52,38 34,40; y 40,10 40,46; ba 21,16; P 21,16>39,11#1; L 20,40>28,48#1; P 39,11>55,15#2; L 40,30>48,28#2"),
+
+  XO("x6-vrijlopen-tussen-de-lijnen", "Passen en positiespel", ["U10", "U11", "U12", "U13"], [9, 12], 15, "35 x 25 m in drie vakken",
+    "Aanspeelbaar tussen de linies: van vak naar vak via de middenman",
+    ["potjes voor drie vakken", "hesjes", "ballen"],
+    "Drie vakken naast elkaar. In elk buitenvak drie spelers met de bal of zonder; in het middenvak één aanvaller en twee verdedigers.",
+    "Een buitenvak speelt naar het andere buitenvak, maar alleen via de middenman. Hij moet zich tussen de twee verdedigers vrijlopen en de bal doorkaatsen of draaien. Lukt het, een punt.",
+    ["Middenman: blijf bewegen tot u in de passlijn staat.", "Sta schuin, zodat u de bal en het andere vak ziet.", "Buitenvak: speel pas als de middenman vrij is."],
+    ["De verdedigers mogen alleen onderscheppen.", "Twee verdedigers in het middenvak.", "Hoogstens twee contacten voor de middenman.", "De middenman moet draaien en zelf doorspelen."],
+    "Rustige verdedigers.", "Minder contacten.",
+    ["Twee middenmannen tegen drie verdedigers.", "Een verdediger mag uit het middenvak druk zetten.", "Na drie geslaagde beurten wisselt de middenman."],
+    "Z 4,8,24,48; Z 28,8,52,48; Z 56,8,76,48; w 10,16 10,40 18,28 40,28 64,16 64,40 70,28; b 34,20 46,36; ba 19,28; L 40,28>40,22#1; P 19,28>39,23#2; P 41,23>63,17#3"),
+
+  XO("x6-rugdekking-2v2-poortjes", "Verdedigen", ["U10", "U11", "U12", "U13"], [4, 12], 12, "20 x 15 m",
+    "Rugdekking geven: 2 tegen 2 naar twee poortjes",
+    ["4 potjes voor twee poortjes", "ballen", "hesjes"],
+    "Twee aanvallers tegen twee verdedigers. De verdedigers beschermen twee poortjes op hun lijn.",
+    "De aanvallers scoren door door een poortje te dribbelen. De eerste verdediger gaat naar de bal, de tweede staat schuin achter hem: dicht genoeg om te helpen, ver genoeg om de andere aanvaller te volgen.",
+    ["Eén gaat naar de bal, de ander staat schuin erachter.", "Praat: 'ik ga', 'ik dek'.", "Speelt de aanvaller over, wissel dan van rol."],
+    ["Groter vak.", "2 tegen 2.", "De aanvallers krijgen een kaatser op de zijlijn.", "De verdedigers moeten binnen tien seconden veroveren."],
+    "Groter vak.", "Kleiner vak.",
+    ["3 tegen 3 met drie poortjes.", "Na verovering scoren de verdedigers door een poortje aan de overkant.", "Met een doelman op één groot doel."],
+    "h 22,46 30,46 50,46 58,46; w 34,12 50,12; b 36,32 46,40; ba 35,13; D 35,13>36,24#1; L 36,32>36,26#1; L 46,40>42,34#1; P 37,24>49,16#2; L 42,34>48,26#2; L 36,26>40,34#2"),
+
+  XO("x6-dekken-man-tegen-man", "Verdedigen", ["U11", "U12", "U13"], [8, 12], 15, "30 x 25 m",
+    "Dekken: elke verdediger houdt zijn aanvaller, 4 tegen 4 op doeltjes",
+    ["4 kleine doeltjes", "hesjes", "ballen"],
+    "Twee ploegen van vier. Elke speler krijgt een vaste tegenstander.",
+    "Speel een wedstrijd op vier kleine doeltjes. Elke verdediger dekt alleen zijn eigen tegenstander. Scoort de tegenstander van een speler, dan doet die speler na het spel een korte opdracht.",
+    ["Sta tussen uw man en het doel, niet ernaast.", "Zie bal en man tegelijk.", "Kom dicht als hij de bal krijgt, niet eerder."],
+    ["Groter veld.", "4 tegen 4 met vaste tegenstanders.", "Na verovering moet binnen vijf seconden gescoord worden.", "Een doelpunt van een gedekte speler telt dubbel."],
+    "Groter veld.", "Kleiner veld.",
+    ["Zonen in plaats van mannen: elke verdediger een vak.", "Met één joker die niemand dekt.", "Op twee grote doelen met doelmannen."],
+    "o 4,18 4,38 76,18 76,38; w 30,16 30,40 48,22 48,36; b 36,18 36,38 54,24 54,34; ba 31,16; P 31,16>47,22#1; L 54,24>50,22#1; L 36,18>42,20#1"),
+
+  XO("x6-rugdekking-3v3-schuiven", "Verdedigen", ["U11", "U12", "U13"], [6, 10], 15, "30 x 25 m",
+    "Schuiven en rugdekking: 3 tegen 3 naar een eindlijn",
+    ["potjes", "hesjes", "ballen"],
+    "Drie aanvallers tegen drie verdedigers. De aanvallers scoren door over de eindlijn te dribbelen.",
+    "De verdedigers schuiven samen naar de kant van de bal. Eén zet druk, de tweede geeft rugdekking, de derde sluit de ruimte in het midden af. Na verovering scoren de verdedigers met een pass naar de trainer.",
+    ["Schuif als groep, niet elk apart.", "De afstand tussen u en uw ploegmaat: een paar meter, niet meer.", "Wie het verst van de bal staat, kijkt naar de diepte."],
+    ["Groter vak.", "3 tegen 3.", "Vier aanvallers tegen drie verdedigers.", "De verdedigers mogen niet achteruit lopen, alleen schuiven."],
+    "Groter vak.", "Een aanvaller extra.",
+    ["Met een doelman op een groot doel.", "Elke geslaagde verovering levert een punt.", "Wissel na vier beurten."],
+    "h 6,8 6,48 74,8 74,48; T 74,28; w 20,14 18,28 20,42; b 46,16 42,28 46,40; ba 21,14; P 21,14>19,27#1; L 46,16>44,22#1; L 42,28>34,26#1; L 46,40>44,34#1; P 19,27>20,41#2; L 44,22>44,30#2; L 34,26>36,36#2; L 44,34>40,40#2"),
+
+  XO("x6-compact-twee-lijnen", "Verdedigen", ["U9", "U10", "U11"], [8, 12], 15, "30 x 25 m",
+    "Compact blijven: met vier tegen vier de ruimte klein maken",
+    ["2 kleine doeltjes", "potjes", "hesjes", "ballen"],
+    "Twee ploegen van vier op een vak met twee kleine doeltjes.",
+    "Speel 4 tegen 4. De verdedigende ploeg moet altijd binnen een strook van ongeveer tien meter breed staan: de trainer roept 'compact!' als de ploeg uit elkaar valt. Een verovering binnen die strook levert een extra punt.",
+    ["Kijk naar de bal en schuif mee.", "Blijf dicht bij elkaar: liever samen dan alleen.", "Wie het dichtst bij de bal is, gaat; de anderen sluiten de ruimte."],
+    ["Smaller veld.", "4 tegen 4.", "Breder veld: compact blijven wordt moeilijker.", "De aanvallers krijgen een joker."],
+    "Smaller veld.", "Breder veld.",
+    ["Met doelmannen op grotere doelen.", "Potjes markeren de strook voor de jongsten.", "Scoren in een eindzone in plaats van in doeltjes."],
+    "o 4,28 76,28; w 20,16 20,40 30,24 30,34; b 44,20 50,28 44,36 56,28; ba 31,24; P 31,24>21,17#1; L 44,20>40,18#1; L 50,28>44,24#1; L 44,36>42,30#1"),
+
+  XO("x6-compact-schuiven-naar-bal", "Verdedigen", ["U10", "U11", "U12"], [8, 12], 15, "35 x 30 m",
+    "Schuiven naar de balkant: vier verdedigers tegen vijf aanvallers",
+    ["1 doel", "potjes", "hesjes", "ballen"],
+    "Vijf aanvallers spelen de bal rond voor de zestien. Vier verdedigers en een doelman verdedigen het doel.",
+    "De aanvallers spelen de bal rustig van kant naar kant en zoeken een opening. De vier verdedigers schuiven als een lijn mee naar de balkant en blijven dicht bij elkaar. Na een verovering scoren ze door de bal naar de trainer op de middenlijn te spelen.",
+    ["Schuif mee terwijl de bal onderweg is.", "De verste verdediger staat iets naar binnen, niet aan de zijlijn.", "Gaat de bal terug, schuif dan samen terug."],
+    ["De aanvallers spelen langzaam.", "Vijf tegen vier.", "De aanvallers spelen in twee contacten.", "Zes aanvallers tegen vier."],
+    "Rustige aanvallers.", "Een aanvaller extra.",
+    ["Met een middenvelder die de verdedigers helpt.", "Wissel elke vijf minuten van rol.", "Een doelpunt van ver telt maar half."],
+    "G 76,28; K 72,28; T 8,28; w 30,8 26,20 24,36 30,48 38,28; b 56,16 54,24 54,32 56,40; ba 31,8; P 31,8>27,19#1; L 56,16>50,14#1; L 54,24>50,20#1; L 54,32>52,28#1; L 56,40>54,36#1"),
+
+  XO("x6-druk-jagen-naar-de-zijlijn", "Verdedigen", ["U9", "U10", "U11", "U12", "U13"], [4, 12], 12, "20 x 15 m",
+    "Druk zetten: de dribbelaar naar de zijlijn jagen",
+    ["potjes", "ballen", "hesjes"],
+    "Een aanvaller met bal tegen een verdediger. De aanvaller scoort door over de eindlijn te dribbelen.",
+    "De verdediger loopt snel naar de bal, remt af op twee meter en zet zijn lichaam zo dat de aanvaller naar de zijlijn moet. Lukt het de aanvaller niet om binnen tien seconden te scoren, of verovert de verdediger de bal, dan scoort de verdediger.",
+    ["Snel erop, rustig de laatste meters.", "Laag op de benen, één voet voor de andere.", "Sta schuin: laat de weg naar de zijlijn open, sluit het midden af."],
+    ["De aanvaller mag alleen rechtdoor dribbelen.", "1 tegen 1 met tien seconden.", "Na verovering moet de verdediger zelf scoren in een doeltje.", "De aanvaller krijgt een kaatser."],
+    "Een makkelijke aanvaller.", "Een kaatser erbij.",
+    ["2 tegen 2: de tweede verdediger geeft rugdekking.", "Op een groot doel met doelman.", "Elke speler doet drie beurten na elkaar."],
+    "h 10,8 70,8 10,48 70,48; w 40,44; b 40,14; ba 41,44; D 41,44>48,32#1; L 40,14>46,26#1; D 48,32>62,22#2; L 46,26>58,22#2"),
+
+  XO("x6-druk-trigger-slechte-pass", "Verdedigen", ["U10", "U11", "U12", "U13"], [8, 12], 15, "25 x 25 m",
+    "Wanneer druk zetten? 5 tegen 3 en jagen op het signaal",
+    ["potjes", "hesjes", "ballen"],
+    "Vijf spelers houden de bal in een vak, drie verdedigers staan klaar.",
+    "De vijf houden de bal. De drie verdedigers jagen pas als er een signaal is: een slechte aanname, een bal in de lucht of een pass naar achteren. Dan gaan ze met drie tegelijk. Lukt het binnen vijf seconden, een punt.",
+    ["Wacht op het moment: een slechte aanname of een bal in de lucht.", "Dan samen en snel, nooit alleen.", "De dichtste neemt de bal, de anderen sluiten de korte passes af."],
+    ["Zes tegen drie.", "Vijf tegen drie.", "Vier tegen drie.", "De vijf spelen in twee contacten."],
+    "Meer balbezitters.", "Minder balbezitters.",
+    ["Na verovering scoren de verdedigers in een doeltje buiten het vak.", "De trainer geeft het signaal met een roep.", "Wissel na elke twee minuten."],
+    "h 14,8 66,8 14,48 66,48; w 16,20 16,38 40,10 64,24 40,46; b 30,26 44,28 38,36; ba 17,20; P 17,20>39,11#1; P 41,11>63,23#2; L 44,28>58,24#2; L 30,26>40,16#2; L 38,36>52,34#2"),
+
+  XO("x6-druk-pressing-4v4-hoog", "Verdedigen", ["U11", "U12", "U13"], [9, 12], 15, "40 x 30 m",
+    "Hoog druk zetten: 4 tegen 4 plus doelman, veroveren op hun helft",
+    ["1 doel", "2 kleine doeltjes", "potjes voor de middenlijn", "hesjes", "ballen"],
+    "Op één helft: een ploeg bouwt op vanaf de doelman met vier spelers naar twee kleine doeltjes. De andere ploeg zet druk en scoort in het grote doel.",
+    "De doelman begint. De vier jagers mogen druk zetten zodra de doelman de bal heeft. Een verovering op de helft van de tegenstander, gevolgd door een doelpunt, telt dubbel.",
+    ["De spits loopt zo dat de doelman naar één kant moet spelen.", "Dan schuift de hele ploeg naar die kant.", "Sluit de terugpass naar de doelman af."],
+    ["De opbouwende ploeg krijgt een speler extra.", "4 tegen 4 plus doelman.", "De opbouwende ploeg mag maar twee contacten.", "Een verovering binnen acht seconden telt driedubbel."],
+    "Een speler extra voor de opbouw.", "Minder contacten voor de opbouw.",
+    ["5 tegen 5 op een groter veld.", "De doelman mag alleen over de grond uitspelen.", "Wissel na zes beurten van rol."],
+    "G 76,28; K 72,28; o 6,16 6,40; w 58,14 58,42 48,28 38,22; b 34,16 34,40 26,28 44,34; ba 70,28; P 70,28>59,15#1; L 44,34>54,22#1; L 34,16>48,14#1; L 48,28>54,30#1; P 58,15>49,27#2; L 54,22>52,26#2"),
+
+  XO("x6-meteen-druk-vijf-seconden", "Omschakelen", ["U10", "U11", "U12", "U13"], [8, 12], 15, "25 x 25 m",
+    "Meteen druk na balverlies: de vijfsecondenregel",
+    ["potjes", "hesjes", "ballen"],
+    "Twee ploegen van vier in een vak. De ploeg in balbezit probeert de bal te houden.",
+    "Speel 4 tegen 4 balbezit. Verliest een ploeg de bal, dan heeft ze vijf seconden om hem terug te winnen. Lukt dat, dan krijgt ze twee punten. Zes passes na elkaar is een punt voor de ploeg in balbezit.",
+    ["Wie de bal verliest, gaat er meteen achteraan.", "De dichtste twee jagen, de anderen sluiten de passlijnen.", "Lukt het niet binnen vijf seconden: terug in positie."],
+    ["Zes seconden.", "Vijf seconden.", "Vier seconden.", "Na terugwinnen moet er binnen tien seconden gescoord worden in een doeltje."],
+    "Meer tijd.", "Minder tijd.",
+    ["Met twee neutralen die met de balbezitter meespelen.", "Scoren in vier kleine doeltjes.", "De trainer telt hardop de seconden."],
+    "h 14,8 66,8 14,48 66,48; w 22,18 22,38 38,28 52,16; b 30,22 46,30 40,40 56,38; ba 39,28; P 39,28>47,29#1; L 38,28>44,30#2; L 22,38>36,34#2; L 30,22>42,24#2"),
+
+  XO("x6-meteen-druk-wie-verliest-jaagt", "Omschakelen", ["U9", "U10", "U11"], [6, 12], 12, "25 x 20 m",
+    "Wie verliest, jaagt: 3 tegen 3 met meteen terugwinnen",
+    ["2 kleine doeltjes", "hesjes", "ballen"],
+    "Twee ploegen van drie op twee kleine doeltjes.",
+    "Speel 3 tegen 3. Wie de bal verliest, moet meteen proberen hem terug te winnen: de speler die hem verloor gaat als eerste. Een doelpunt binnen vijf seconden na een terugwinst telt dubbel.",
+    ["Na balverlies niet stilstaan: meteen erachteraan.", "Ga eerst naar de bal, dan pas denken.", "Ploegmaten: help mee en sluit de ruimte."],
+    ["Groter veld.", "3 tegen 3.", "Kleiner veld met meer duels.", "Wie de bal verliest, krijgt een extra punt als hij hem zelf terugwint."],
+    "Groter veld.", "Kleiner veld.",
+    ["4 tegen 4 op vier doeltjes.", "Met doelmannen op grotere doelen.", "De trainer gooit na elk doelpunt meteen een nieuwe bal in."],
+    "o 4,28 76,28; w 30,20 30,36 44,28; b 50,20 50,36 38,30; ba 45,28; P 45,28>49,21#1; L 44,28>48,24#2; L 30,20>40,18#2"),
+
+  XO("x6-meteen-druk-na-schot", "Omschakelen", ["U11", "U12", "U13"], [8, 12], 15, "35 x 30 m",
+    "Na het schot meteen druk: 4 tegen 3 en terugwinnen",
+    ["1 doel", "2 kleine doeltjes", "hesjes", "ballen"],
+    "Vier aanvallers vallen aan op een groot doel met doelman, verdedigd door drie spelers. Na balverovering scoren de verdedigers in een van de twee kleine doeltjes op de middenlijn.",
+    "De aanvallers spelen naar een doelkans. Verliezen ze de bal, of pakt de doelman het schot, dan zetten ze meteen druk om te voorkomen dat de verdedigers in een doeltje scoren. Een terugwinst binnen vijf seconden levert een punt.",
+    ["Na balverlies: de dichtste jaagt, de anderen sluiten de doeltjes af.", "Sta na uw schot niet stil.", "Liever een fout ver van ons doel dan een counter."],
+    ["Vijf aanvallers.", "Vier tegen drie.", "Vier tegen vier.", "De verdedigers mogen ook dribbelen tot over de middenlijn."],
+    "Een aanvaller extra.", "Gelijk aantal.",
+    ["Met een middenvelder die alleen na balverlies meedoet.", "Elke counter van de verdedigers telt dubbel.", "Wissel na zes aanvallen."],
+    "G 76,28; K 72,28; o 6,16 6,40; w 40,18 40,38 52,28 58,40; b 62,24 62,34 54,18; ba 53,28; P 53,28>69,28#1; L 54,18>48,16#2; L 40,18>46,18#2; L 52,28>58,26#2"),
+
+  XO("x6-druk-1v1-afremmen", "Verdedigen", ["U9", "U10", "U11"], [4, 16], 10, "15 x 10 m",
+    "Afremmen en afstand houden: de eerste stap van druk zetten",
+    ["potjes", "ballen"],
+    "Twee rijen tegenover elkaar op 15 meter. De voorste van de ene rij heeft de bal.",
+    "De speler met de bal passt naar de overkant en loopt meteen achter zijn pass aan. Hij remt af op twee meter van de ontvanger en blijft daar staan, laag op de benen. De ontvanger probeert hem voorbij te dribbelen. Daarna sluit elke speler achteraan de andere rij aan.",
+    ["Snel lopen, dan kleine pasjes.", "Stop op twee meter, niet te dichtbij.", "Kijk naar de bal, niet naar de voeten van de aanvaller."],
+    ["De aanvaller mag alleen naar één kant.", "1 tegen 1 na de pass.", "De verdediger moet de aanvaller naar links jagen.", "Na verovering scoort de verdediger in een doeltje."],
+    "Een makkelijke aanvaller.", "Een richting opleggen.",
+    ["Met twee aanvallers en twee verdedigers.", "Op een klein doeltje achter de aanvaller.", "Wie verovert, krijgt een punt."],
+    "h 12,20 12,36 68,20 68,36; w 14,28 66,28; ba 15,28; P 15,28>64,28#1; L 14,28>58,28#1"),
+];
+
+const ALLE_EXTRA=[...EXTRA_1,...EXTRA_2,...EXTRA_3,...EXTRA_4,...EXTRA_5,...EXTRA_6];
 // Oefeningen in de werkwijze van de KNVB (voetbalecht, wedstrijdvormen 4/6/8 tegen 8).
 // land: "nl" = alleen zichtbaar voor trainers in Nederland. Zonder land: voor iedereen.
 const NL_OEFENINGEN = [
@@ -3373,7 +3578,7 @@ function kop(scherm) {
           ? "trainingen"
           : scherm;
   return `<header class="app-kop"><div class="kop">${!TABBLADEN.includes(scherm) && (geschiedenis.length > 1 || inApp) ? '<button class="terug-knop" id="nterug" aria-label="Terug naar het vorige scherm"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Terug</span></button>' : ""}<button class="merk" id="home" aria-label="SessionReady, naar start">${merk(!1)}</button>
-    ${links.length ? `<nav class="app-nav" aria-label="Menu">${links.map(([k, l]) => `<button data-nav="${k}" ${actief === k ? 'aria-current="page"' : ""}>${navIc(k)}<span>${l}</span></button>`).join("")}</nav>` : ""}
+    ${links.length ? `<nav class="app-nav" aria-label="Menu">${links.map(([k, l]) => `<button data-nav="${k}" ${actief === k ? 'aria-current="page"' : ""}>${navIc(k)}<span>${l}</span></button>`).join("")}<button type="button" class="nav-kiki" aria-label="Coach Kiki openen">${AVATAR(26)}<span>Kiki</span></button></nav>` : ""}
     <span class="kop-rechts">${inApp ? accountMenuHtml(scherm) : ""}
     ${state.email ? (inApp ? "" : '<button class="btn alt" id="uit" style="min-height:44px">Afmelden</button>') : scherm === "account" ? "" : '<button class="btn main" id="nin" style="min-height:44px">Inloggen</button>'}</span></div></header>`;
 }
@@ -3430,6 +3635,9 @@ function plakKop(screen) {
             (geschiedenis.length = 0), go(k.dataset.nav);
           }),
       ),
+      app
+        .querySelector(".nav-kiki")
+        ?.addEventListener("click", () => document.getElementById("kbtn")?.click()),
       koppelAccountMenu(),
       document
         .getElementById("nin")
@@ -4472,7 +4680,8 @@ const KLEUROPTIES = {
   heeftKeuze = () =>
     bordUI.sel.length > 0 || bordUI.lijnSel != null || bordUI.zoneSel != null;
 let tekentBord = !1,
-  toonNummers = !1;
+  toonNummers = !1,
+  markerSchaal = 1;
 const isGekozen = (id) => tekentBord && bordUI.sel.includes(id);
 let bord3d = null,
   kijker = null;
@@ -4691,7 +4900,7 @@ function itemSvg(it, nummers) {
           ? `<path d="M0 -3.5L1.25 -2.05H-1.25z" transform="rotate(${it.r})" fill="${kleur[0]}" stroke="${kleur[1]}" stroke-width=".3" stroke-linejoin="round"/>`
           : "";
     return g2(
-      `<circle r="2.4" cy=".45" fill="#0b2a1a" opacity=".28"/>${neus}<circle r="2.3" fill="${kleur[0]}" stroke="${kleur[1]}" stroke-width=".4"/><text y=".8" text-anchor="middle" font-size="${String(label2).length > 1 ? 1.8 : 2.3}" font-weight="700" font-family="Archivo, Arial, sans-serif" fill="${kleur[2]}">${esc(label2)}</text>`,
+      `${markerSchaal !== 1 ? `<g transform="scale(${markerSchaal})">` : ""}<circle r="2.4" cy=".45" fill="#0b2a1a" opacity=".28"/>${neus}<circle r="2.3" fill="${kleur[0]}" stroke="${kleur[1]}" stroke-width=".4"/><text y=".8" text-anchor="middle" font-size="${String(label2).length > 1 ? 1.8 : 2.3}" font-weight="700" font-family="Archivo, Arial, sans-serif" fill="${kleur[2]}">${esc(label2)}</text>${markerSchaal !== 1 ? "</g>" : ""}`,
       !0,
     );
   }
@@ -6351,9 +6560,10 @@ function schetsSvg(items, lijnen, veld, zones = []) {
   (bord = { ...bord, veld, stappen: [{ items, lijnen, zones }] }),
     (toonNummers = !1);
   const { w, h } = VELDEN[veld],
-    m = veldMarge(veld),
-    svg = `<svg viewBox="${-m} ${-m} ${w + 2 * m} ${h + 2 * m}" class="schets-bord" role="img" aria-label="Schets van de oefening">${m ? omgeving(w, h, m) : ""}${bordSvgInhoud(items, lijnen, zones).replace(`<rect width="${w}" height="${h}" fill="#2c7a52"/>`, `<rect width="${w}" height="${h}" fill="#2c7a52"${VELDEN[veld].rand ? "" : ' stroke="#ffffffa6" stroke-width=".45"'}/>`).replaceAll('id="pijl"', `id="pijl-${veld}"`).replaceAll("url(#pijl)", `url(#pijl-${veld})`)}</svg>`;
-  return (bord = bewaard), (toonNummers = !1), svg;
+    m = veldMarge(veld);
+  markerSchaal = Math.min(1.5, Math.max(1.15, (Math.max(w, (h * 4) / 3) + 2 * m) / 80));
+  const svg = `<svg viewBox="${-m} ${-m} ${w + 2 * m} ${h + 2 * m}" class="schets-bord" role="img" aria-label="Schets van de oefening">${m ? omgeving(w, h, m) : ""}${bordSvgInhoud(items, lijnen, zones).replace(`<rect width="${w}" height="${h}" fill="#2c7a52"/>`, `<rect width="${w}" height="${h}" fill="#2c7a52"${VELDEN[veld].rand ? "" : ' stroke="#ffffffa6" stroke-width=".45"'}/>`).replaceAll('id="pijl"', `id="pijl-${veld}"`).replaceAll("url(#pijl)", `url(#pijl-${veld})`)}</svg>`;
+  return (bord = bewaard), (toonNummers = !1), (markerSchaal = 1), svg;
 }
 const LEERDOELEN = [
     ["Passen en positiespel", "Passen en vrijlopen"],
@@ -6362,6 +6572,13 @@ const LEERDOELEN = [
     ["Omschakelen", "Omschakelen"],
     ["Verdedigen", "Verdedigen"],
     ["Techniek", "Techniek en balbeheersing"],
+  ],
+  TE_VROEG = [
+    "Druk zetten",
+    "Compact verdedigen",
+    "Dekken en rugdekking",
+    "Samenspel: 1-2 en derde man",
+    "Meteen druk na balverlies",
   ],
   LEERDOEL_LIJST = [
     {
@@ -6799,7 +7016,7 @@ function kiesVoor(
       (spelers2 > o.sp[1] * 2 ? 6 : 0),
     ruis = () => Math.random() * 14,
     gescoord = schud(lijst).map((o) => [
-      score(o, zoek) * 10 + voorkeur(o) - straf(o) + ruis(),
+      score(o, zoek) * 24 + voorkeur(o) - straf(o) + ruis(),
       o,
     ]);
   return gescoord.sort((a, b2) => b2[0] - a[0]), gescoord[0]?.[1] || null;
@@ -7022,6 +7239,7 @@ const FASE_TOON = {
     Opwarming: "Warming-up",
     "Kern: aanleren": "Oefenvorm 1",
     "Kern: toepassen": "Oefenvorm 2",
+    "Kern: tweede vaardigheid": "Oefenvorm 2: tweede vaardigheid",
     "Kern: in spelvorm": "Oefenvorm 3",
     Wedstrijd: "Partijvorm",
     "Slot: spelvorm": "Slot: spelvorm",
@@ -7248,7 +7466,18 @@ function maakTraining(
         voorkeur,
       );
       o && gebruikt.add(o.id);
-      const blok = { fase, id: o?.id || null, min: min2[i] };
+      const blok = {
+        fase:
+          fase === "Kern: toepassen" &&
+          isOnderbouw(ploeg) &&
+          doelen.length < 2 &&
+          o &&
+          o.th !== themas[0]
+            ? "Kern: tweede vaardigheid"
+            : fase,
+        id: o?.id || null,
+        min: min2[i],
+      };
       return (
         o &&
           recent[o.id] &&
@@ -10219,7 +10448,7 @@ const render = {
             .map(
               (g2) =>
                 `<div class="doelchips doelpaneel" role="tabpanel" id="paneel-${g2}" aria-labelledby="tab-${g2}" data-paneel="${g2}" ${g2 === startGroep ? "" : "hidden"}>${LEERDOEL_LIJST.filter(
-                  (x) => x.g === g2,
+                  (x) => x.g === g2 && !(TE_VROEG.includes(x.k) && ["U6", "U7", "U8"].includes(p.leeftijd)),
                 )
                   .map(
                     (x) =>
@@ -10652,18 +10881,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
               }</select>${t.eigen ? "" : '<button class="btn alt" id="topnieuw">Nieuw voorstel</button>'}<button class="btn main" id="tbewaar">Bewaar de training</button>`
             : `<button class="btn alt" id="tweg">Verwijderen</button><button class="btn alt" id="tprint">Afdrukken${proTag()}</button><button class="btn main" id="tveld">Start op het veld</button>`
         }</div></div>
-      ${p ? `<form class="kiki-zoek kiki-tr" id="ktf"><span class="kiki-zoek-merk">${AVATAR(42)}</span><div class="field"><label for="ktin">Vraag Coach Kiki om deze training aan te passen</label><input id="ktin" type="text" maxlength="300" autocomplete="off" placeholder="Bijvoorbeeld: maak de wedstrijd uitdagender, of: ik heb geen kleine doeltjes"></div><button class="btn alt">Pas aan</button></form><p class="hint kiki-tr-uitleg" id="ktstatus" role="status">${esc(kikiTrUitleg)}</p>` : ""}
-      <div class="tijdlijn groot" aria-hidden="true">${regels.map((r) => `<span style="flex:${r.b.min}" class="${faseRuw(r.b) === "Wedstrijd" ? "nu" : ""}"><b>${{ "Kern: aanleren": "Kern 1", "Kern: toepassen": "Kern 2", "Kern: in spelvorm": "Kern 3", "Slot: spelvorm": "Slot", "Oefenvorm 1": "Oef. 1", "Oefenvorm 2": "Oef. 2", "Oefenvorm 3": "Oef. 3" }[faseNaam(r.b)] || faseNaam(r.b)}</b>${r.b.min}\u2032</span>`).join("")}</div>
-      ${(t.doelen || [])
-        .map((d) => doelInfo(d))
-        .filter((x) => x?.focus)
-        .map(
-          (x) =>
-            `<p class="eigen-melding"><strong>Aandachtspunt bij ${esc(x.k.toLowerCase())}:</strong> ${esc(x.focus)}</p>`,
-        )
-        .join("")}
-      ${isNL() ? `<p class="knvb-coach"><strong>Coachen zoals de KNVB:</strong> coach begeleidend tijdens het spel met korte aanwijzingen, en leg het spel alleen stil als de spelers er echt iets van leren. Kijk na elke vorm: snappen ze de bedoeling, raken ze vaak genoeg de bal, is het niet te makkelijk en niet te moeilijk?</p>` : ""}
-      <div id="tipvak">${tipHtml(trainerstip(p?.leeftijd, null, t.id || "concept", tipVerder))}</div>
+      <div class="tijdlijn groot" aria-hidden="true">${regels.map((r) => `<span style="flex:${r.b.min}" class="${faseRuw(r.b) === "Wedstrijd" ? "nu" : ""}"><b>${{ "Kern: aanleren": "Kern 1", "Kern: toepassen": "Kern 2", "Kern: tweede vaardigheid": "Kern 2", "Oefenvorm 2: tweede vaardigheid": "Oef. 2", "Kern: in spelvorm": "Kern 3", "Slot: spelvorm": "Slot", "Oefenvorm 1": "Oef. 1", "Oefenvorm 2": "Oef. 2", "Oefenvorm 3": "Oef. 3" }[faseNaam(r.b)] || faseNaam(r.b)}</b>${r.b.min}\u2032</span>`).join("")}</div>
       <ol class="blokken">${regels
         .map(({ b: b2, o, i, van, tot }) =>
           o
@@ -10713,6 +10931,17 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         .join("")}</ol>
       ${t.blokken.length ? "" : `<div class="card leeg-tr"><h2>Stel uw training samen</h2><p class="muted">Voeg oefeningen toe uit de bibliotheek of uit uw eigen tekeningen. Per oefening kiest u de duur. Ons advies: begin met een opwarming en eindig met een wedstrijd.</p></div>`}
       <div class="tr-toevoeg"><button class="btn main" id="tvoeg">+ Oefening toevoegen</button><button class="btn alt" id="tteken">Teken een eigen oefening</button></div>
+      ${(t.doelen || [])
+        .map((d) => doelInfo(d))
+        .filter((x) => x?.focus)
+        .map(
+          (x) =>
+            `<p class="eigen-melding"><strong>Aandachtspunt bij ${esc(x.k.toLowerCase())}:</strong> ${esc(x.focus)}</p>`,
+        )
+        .join("")}
+      ${isNL() ? `<p class="knvb-coach"><strong>Coachen zoals de KNVB:</strong> coach begeleidend tijdens het spel met korte aanwijzingen, en leg het spel alleen stil als de spelers er echt iets van leren. Kijk na elke vorm: snappen ze de bedoeling, raken ze vaak genoeg de bal, is het niet te makkelijk en niet te moeilijk?</p>` : ""}
+      <div id="tipvak">${tipHtml(trainerstip(p?.leeftijd, null, t.id || "concept", tipVerder))}</div>
+      ${p ? `<form class="kiki-zoek kiki-tr" id="ktf"><span class="kiki-zoek-merk">${AVATAR(42)}</span><div class="field"><label for="ktin">Vraag Coach Kiki om deze training aan te passen</label><input id="ktin" type="text" maxlength="300" autocomplete="off" placeholder="Bijvoorbeeld: maak de wedstrijd uitdagender, of: ik heb geen kleine doeltjes"></div><button class="btn alt">Pas aan</button></form><p class="hint kiki-tr-uitleg" id="ktstatus" role="status">${esc(kikiTrUitleg)}</p>` : ""}
       <section class="card"><h2>Materiaal per onderdeel</h2><table class="mat-tabel"><tbody>${regels
         .filter((r) => r.o)
         .map(
@@ -11196,22 +11425,24 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
     );
     (app.innerHTML = `<main class="wrap wider">
       <div class="col"><h1 class="big" tabindex="-1">Oefenbibliotheek</h1><p class="muted">${B.OEFENINGEN.length} oefeningen voor U6\u2013U13, elk makkelijker of moeilijker te maken. ${B.OEFENINGEN.filter((o) => o.bron === "praktijk").length} ervan komen uit echte trainingen en zijn getest op het veld.</p></div>
+      <div class="field bib-zoekveld"><label for="bzoek" class="sr">Zoek een oefening</label><input id="bzoek" type="search" enterkeyhint="search" placeholder="Zoek: rondo, afwerken, 1 tegen 1" value="${esc(f2.zoek)}"></div>
       <div class="mappen-rij" role="radiogroup" aria-label="Mappen"><button role="radio" class="mapknop${f2.map ? "" : " aan"}" data-map="">Alle oefeningen</button><button role="radio" class="mapknop${f2.map === "fav" ? " aan" : ""}" data-map="fav"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="currentColor"/></svg>Favorieten <span>${(state.fav || []).length}</span></button><button role="radio" class="mapknop${f2.map === "mijn" ? " aan" : ""}" data-map="mijn">Mijn oefeningen <span>${(state.eigenOef || []).length}</span></button>${mappen.map((m) => `<button role="radio" class="mapknop${f2.map === m.id ? " aan" : ""}" data-map="${m.id}">${esc(m.naam)} <span>${m.ids.length}</span></button>`).join("")}<button class="mapknop nieuw" id="nmap">+ Nieuwe map</button><button class="mapknop nieuw" id="bimport"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 15V4M7 9l5-5 5 5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Importeer pdf of Word</button></div>
       ${f2.map === "fav" && !(state.fav || []).length ? '<div class="plan"><p>Nog geen favorieten. Tik op de ster bij een oefening om ze hier te bewaren.</p></div>' : ""}
       <details class="kiki-uitklap" ${bibFilter.kikiRes || bibFilter.kikiVraag ? "open" : ""}><summary>${AVATAR(28)}<span><strong>Niet gevonden wat u zoekt?</strong> Beschrijf het aan Coach Kiki</span></summary>
       <form class="kiki-zoek" id="kzf"><span class="kiki-zoek-merk">${AVATAR(40)}</span><div class="field"><label for="kzin">Vraag het Coach Kiki: beschrijf de oefening die u zoekt</label><input id="kzin" type="text" maxlength="300" autocomplete="off" placeholder="Bijvoorbeeld: een opwarming met veel balcontacten voor 14 spelers U11" value="${esc(bibFilter.kikiVraag || "")}"></div><button class="btn main">Zoek</button></form></details>
       <div id="kzres" aria-live="polite">${bibFilter.kikiRes ? `<section class="kiki-zoek-res"><p class="muted">${esc(bibFilter.kikiRes.kop)}</p><div class="kiki-resultaten rij">${bibFilter.kikiRes.lijst.map(kikiKaart).join("")}</div></section>` : ""}</div>
       ${f2.map === "mijn" && !(state.eigenOef || []).length ? '<div class="plan"><p>Nog geen eigen oefeningen. Teken er een op het tekenbord en kies <strong>Bewaar als oefening</strong>.</p><button class="btn alt" id="nbordleeg">Open het tekenbord</button></div>' : ""}
+      <details class="bib-filterbox" ${bibFilter.filtersOpen ?? innerWidth > 760 ? "open" : ""}><summary>Filters${(f2.thema !== "alle" ? 1 : 0) + (f2.leeftijd !== "alle" ? 1 : 0) + (f2.praktijk ? 1 : 0) + (f2.multimove ? 1 : 0) ? ` <span class="bib-filters-tel">${(f2.thema !== "alle" ? 1 : 0) + (f2.leeftijd !== "alle" ? 1 : 0) + (f2.praktijk ? 1 : 0) + (f2.multimove ? 1 : 0)} actief</span>` : ""}</summary>
       <div class="bib-filter">
-        <div class="field"><label for="bzoek">Zoeken</label><input id="bzoek" type="text" placeholder="Bijvoorbeeld rondo, afwerken, 1 tegen 1" value="${esc(f2.zoek)}"></div>
         <div class="field"><span class="lab" id="lth">Thema</span><div class="chips-rij" role="radiogroup" aria-labelledby="lth">${["alle", ...B.THEMAS].map((t) => `<button role="radio" class="fchip${f2.thema === t ? " aan" : ""}" aria-checked="${f2.thema === t}" data-th="${esc(t)}">${t === "alle" ? "Alle thema's" : esc(t)}</button>`).join("")}</div></div>
         <div class="bib-filter-rij">
           <div class="field"><span class="lab" id="llf">Leeftijd</span><div class="modus" role="radiogroup" aria-labelledby="llf">${["alle", ...LEEFTIJDEN].map((l) => `<button role="radio" data-lf="${l}" class="${f2.leeftijd === l ? "aan" : ""}" aria-checked="${f2.leeftijd === l}">${l === "alle" ? "Alle" : l}</button>`).join("")}</div></div>
           <div class="field"><span class="lab" id="lpr">Herkomst</span><label class="vink praktijk-vink"><input type="checkbox" id="fpr" ${f2.praktijk ? "checked" : ""}><span>Alleen getest op training</span></label><label class="vink praktijk-vink"><input type="checkbox" id="fmm" ${f2.multimove ? "checked" : ""}><span>Alleen Multimove (brede motoriek)</span></label></div>
         </div>
       </div>
+      </details>
       <p class="hint" role="status">${lijst.length === 1 ? "1 oefening" : `${lijst.length} oefeningen`}</p>
-      ${isPro() ? "" : '<div class="plan"><p><strong>Gratis</strong>: de volledige bibliotheek staat voor u open, met animatie in 2D. Met Pro bekijkt u elke oefening ook in 3D en drukt u ze af.</p><button class="btn alt" id="bpro" style="min-height:44px">Bekijk Pro</button></div>'}
+      ${isPro() ? "" : '<div class="plan" hidden><p><strong>Pro</strong>: de volledige bibliotheek staat voor u open, met animatie in 2D. Met Pro bekijkt u elke oefening ook in 3D en drukt u ze af.</p><button class="btn alt" id="bpro" style="min-height:44px">Bekijk Pro</button></div>'}
       ${lijst.length ? bibInhoud(lijst, f2) : '<div class="card"><p>Geen oefeningen gevonden. Kies een ander thema of maak de zoekterm korter.</p><div><button class="btn alt" id="reset">Toon alle oefeningen</button></div></div>'}
     </main>`),
       document
@@ -11254,6 +11485,9 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         (bibFilter.multimove = fmm.checked),
           bibOpnieuw(),
           document.getElementById("fmm").focus();
+      }),
+      app.querySelector(".bib-filterbox")?.addEventListener("toggle", (e) => {
+        bibFilter.filtersOpen = e.target.open;
       }),
       (bzoek.oninput = () => {
         bibFilter.zoek = bzoek.value;
