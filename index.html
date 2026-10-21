@@ -6759,9 +6759,14 @@ function kiesVoor(
   recent = {},
   voorkeur = () => 0,
 ) {
-  const vrij = (o) => !bezet.has(o.id);
-  let lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o));
+  const vrij = (o) => !bezet.has(o.id),
+    past = (o) => o.sp[0] <= spelers2 + 1;
+  let lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o) && past(o));
   lijst.length ||
+    (lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o) && past(o), !1)),
+    lijst.length ||
+    (lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o))),
+    lijst.length ||
     (lijst = kandidaten(ploeg, spelers2, (o) => filter(o) && vrij(o), !1)),
     lijst.length ||
       (lijst = kandidaten(
@@ -6790,7 +6795,7 @@ function kiesVoor(
             : 25
         : 0) +
       (heeftMateriaal(ploeg, o) ? 0 : 12) +
-      (spelers2 < o.sp[0] ? 14 : 0) +
+      (spelers2 < o.sp[0] ? 60 : 0) +
       (spelers2 > o.sp[1] * 2 ? 6 : 0),
     ruis = () => Math.random() * 14,
     gescoord = schud(lijst).map((o) => [
