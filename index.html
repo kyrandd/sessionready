@@ -321,6 +321,11 @@ h1,h2{line-height:1.08}
   .veld-voet{grid-column:2;grid-row:3}
   .veld-tekst h1{font-size:1.5rem}
 }
+
+.faq-contact{margin:22px 0 0;padding:14px 18px;border-radius:12px;background:#e9f3ec;color:#14402a;font-weight:600}
+.faq-contact a,.voet-hulp a,.pf-hulp a{color:var(--brand);font-weight:700}
+.voet-hulp{flex-basis:100%;font-weight:600;color:var(--ink)}
+.pf-hulp{margin-top:14px;font-size:15px}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -11459,6 +11464,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           : `<section class="pf-account" aria-labelledby="hgeg"><h2 class="pf-h" id="hgeg">Account</h2>
         <div class="pf-rij"><button type="button" class="btn alt" id="pexport">Mijn gegevens downloaden</button><button class="btn alt" id="puit">Afmelden</button>${ECHT ? '<button type="button" class="btn alt pf-weg" id="pweg">Account verwijderen</button>' : ""}</div>
         <p class="hint" id="pweghint" role="status"></p>
+        <p class="pf-hulp">Problemen of vragen? Mail ons op <a href="mailto:hallo@sessionready.be">hallo@sessionready.be</a>.</p>
         ${ECHT ? '<p class="pf-links"><a href="/privacy" target="_blank" rel="noopener">Privacyverklaring</a> \xB7 <a href="/voorwaarden" target="_blank" rel="noopener">Gebruiksvoorwaarden</a></p>' : ""}</section>`
       }</div></main>`),
       f.querySelectorAll("input[name=land]").forEach(
@@ -12138,8 +12144,8 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         <h2 id="h-verschil">Oefeningen vindt u overal. De training van vanavond niet.</h2>
         <p class="lead">Andere sites geven u een stapel oefeningen. SessionReady geeft u de volledige training, klaar voor uw ploeg.</p>
         <div class="verschil-raster">
-          <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul class="kruisjes"><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw spelers en uw materiaal</li><li>Op het veld: een pdf of een scherm vol tekst</li></ul></div>
-          <div class="verschil-kol wij"><span class="verschil-tag">SessionReady</span><h3>Een training op maat van uw ploeg</h3><ul class="wij-lijst"><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal berekend voor uw ploeg</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: alles op \xE9\xE9n scherm, met tips om bij te sturen</li></ul></div>
+          <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul class="kruisjes"><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw spelers en uw materiaal</li><li>Lange teksten zonder hulp als het niet loopt</li></ul></div>
+          <div class="verschil-kol wij"><span class="verschil-tag">SessionReady</span><h3>Een training op maat van uw ploeg</h3><ul class="wij-lijst"><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal berekend voor uw ploeg</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Elke oefening met schets, coachpunten en tips om bij te sturen</li></ul></div>
         </div>
       </section>
 
@@ -12173,22 +12179,6 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
               .join("")}</div>
           </div>
         </div>
-      </section>
-
-      <section class="sectie toon" aria-labelledby="h-veld">
-        <div class="toon-tekst">
-          <h2 id="h-veld">Op het veld: uw gsm als fiche</h2>
-          <p class="lead">Grote letters, een klok per oefening en de coachpunten bij de hand. Goed leesbaar in de zon en makkelijk te bedienen, ook met koude vingers.</p>
-        </div>
-        <div class="gsm" aria-hidden="true"><div class="gsm-in">
-          <p class="gsm-fase">Oefening 3 van 5</p>
-          <p class="gsm-titel">Driehoek met derde man</p>
-          <p class="gsm-klok">12:40</p>
-          <div class="gsm-balk"><span style="width:30%"></span></div>
-          ${(() => { const o = oefVan("derde-man"); if (!o) return SCHETS.drie; const sc = schetsVan(o); return schetsSvg(sc.items, sc.lijnen, o.veld, sc.zones); })()}
-          <ul><li>Pass op de voet van uw ploegmaat</li><li>Na de pass: meteen bewegen</li><li>Roep wie de bal krijgt</li></ul>
-          <span class="gsm-knop">Volgende oefening</span>
-        </div></div>
       </section>
 
       <section class="sectie toon" aria-labelledby="h-kiki">
@@ -12226,7 +12216,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <details><summary>Werkt het ook als ik maar acht spelers heb?</summary><p>Ja. U geeft per training het aantal spelers op, en de app kiest groepen en spelvormen die daarbij passen.</p></details>
           <details><summary>Hoe ziet een training eruit?</summary><p>Een opwarming met bal, een kern in twee stappen (eerst aanleren, dan toepassen tegen tegenstanders) en een wedstrijdvorm als slot. Elke oefening is een spel met een doel: de kinderen leren voetballen door te voetballen.</p></details>
           <details><summary>Wat als ik weinig materiaal heb?</summary><p>U vult \xE9\xE9n keer in wat u hebt. Ontbreekt er iets voor een oefening, dan staat erbij waarmee u het vervangt, bijvoorbeeld twee potjes als doeltje.</p></details>
-          <details><summary>Werkt het op mijn gsm, ook op het veld?</summary><p>Ja, in de browser van uw gsm, zonder iets te installeren. U kunt de app op uw beginscherm zetten. Een training die u geopend hebt, blijft beschikbaar als het bereik aan het veld wegvalt.</p></details>
+          <details><summary>Werkt het op mijn gsm, ook op het veld?</summary><p>Ja, in de browser van uw gsm, zonder iets te installeren. U kunt de app op uw beginscherm zetten. Een training die u geopend hebt, blijft beschikbaar als het bereik aan het veld wegvalt. Een aparte app voor uw gsm volgt later.</p></details>
           <details><summary>Kan ik mijn eigen oefeningen toevoegen?</summary><p>Ja. Teken ze op het tekenbord, in stappen die als animatie afspelen, of laat Coach Kiki ze uit een document overnemen. Uw eigen oefeningen ziet alleen u, tenzij u ze deelt met uw club.</p></details>
           <details><summary>Wie maakt de oefeningen?</summary><p>De oefeningen zijn uitgeschreven door een jeugdtrainer en zijn afgestemd op de jeugdopleiding in Belgi\xEB en Nederland. Elke oefening heeft een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
           <details><summary>Kan ik het eerst proberen?</summary><p>Ja, met de demo bovenaan, zonder account. De app zelf doet veel meer: uw eigen ploeg, de hele bibliotheek, het tekenbord en de fiche op het veld.</p></details>
@@ -12235,11 +12225,12 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <details><summary>Kan ik Pro opzeggen?</summary><p>Ja, op elk moment. Uw ploegen en bewaarde trainingen blijven staan, ook als u later opnieuw begint.</p></details>
           <details><summary>Kan ik mijn aankoop herroepen?</summary><p>Ja. Binnen 14 dagen na de aankoop kunt u zonder reden afzien van Pro of de studentenprijs. Omdat Pro meteen start, betaalt u dan alleen voor de dagen dat u het al gebruikte; de rest krijgt u binnen 14 dagen terug.</p></details>
         </div>
+        <p class="faq-contact">Staat uw vraag er niet bij, of loopt er iets mis? <a href="mailto:hallo@sessionready.be">Mail ons op hallo@sessionready.be</a>. U krijgt een antwoord van een mens, meestal binnen twee werkdagen.</p>
       </section>
 
       <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Klaar voor uw volgende training?</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
     </main>
-    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${(() => { const thuis = window.SR_SITE || ECHT || PUBLIEK, w = thuis ? "" : "https://www.sessionready.be", t = thuis ? "" : ' target="_blank" rel="noopener"'; return `<a class="link" href="${w}/juridisch"${t}>Bedrijfsgegevens en privacy</a><a class="link" href="${w}/voorwaarden"${t}>Voorwaarden</a>`; })()}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
+    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${(() => { const thuis = window.SR_SITE || ECHT || PUBLIEK, w = thuis ? "" : "https://www.sessionready.be", t = thuis ? "" : ' target="_blank" rel="noopener"'; return `<a class="link" href="${w}/juridisch"${t}>Bedrijfsgegevens en privacy</a><a class="link" href="${w}/voorwaarden"${t}>Voorwaarden</a>`; })()}<span class="voet-hulp">Problemen of vragen? Mail <a href="mailto:hallo@sessionready.be">hallo@sessionready.be</a>.</span><span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
     for (const id of ["a", "a0", "a2", "a4"])
       document.getElementById(id).onclick = () => go("account", "registreren");
     (a3.onclick = () => {
