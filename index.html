@@ -309,6 +309,18 @@ body:has(.app-nav) .kiki-btn,body[data-scherm=start] .kiki-btn{display:none!impo
 #vraagkiki{margin-top:18px}
 /* Koppen: iets meer regelafstand zodat accenten en onderlengtes niet tegen elkaar komen. */
 h1,h2{line-height:1.08}
+
+/* Demo-fiche op de gsm: schets bovenaan op volle breedte, zodat ze leesbaar is. */
+@media (max-width:520px){.demo-grid .demo-schets{grid-template-columns:minmax(0,1fr)}.demo-grid .demo-veld svg{max-height:220px}}
+/* Veldfiche in liggend formaat: schets links, tekst en klok rechts. */
+@media (orientation:landscape) and (max-height:520px){
+  .veld{max-width:none;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-rows:auto minmax(0,1fr) auto}
+  .veld-kop{grid-column:1/-1}
+  .veld-schets{grid-column:1;grid-row:2/4}
+  .veld-tekst{grid-column:2;grid-row:2;overflow:auto;min-height:0}
+  .veld-voet{grid-column:2;grid-row:3}
+  .veld-tekst h1{font-size:1.5rem}
+}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -12116,7 +12128,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           </div>
           <figure class="klembord" style="margin:0" aria-label="Uw training"><div class="fiche" id="fiche"></div></figure>
           </div>
-          <p class="demo-noot"><strong>Dit is slechts een voorproefje van de app.</strong> Met een account stelt u uw eigen ploeg en materiaal in, kiest u uit meer dan 460 oefeningen met animaties in 2D en 3D, tekent u uw eigen oefeningen en neemt u de training mee naar het veld.</p>
+          <p class="demo-noot"><strong>Dit is slechts een voorproefje van de app.</strong> Met een account bewaart u uw ploegen en trainingen, plant u het hele seizoen en werkt u met de volledige bibliotheek.</p>
         </section>
       </div>
     </header>
@@ -12127,7 +12139,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         <p class="lead">Andere sites geven u een stapel oefeningen. SessionReady geeft u de volledige training, klaar voor uw ploeg.</p>
         <div class="verschil-raster">
           <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul class="kruisjes"><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw spelers en uw materiaal</li><li>Op het veld: een pdf of een scherm vol tekst</li></ul></div>
-          <div class="verschil-kol wij"><span class="verschil-tag">SessionReady</span><h3>De training van vanavond, in \xE9\xE9n minuut</h3><ul class="wij-lijst"><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal voor uw spelers en uw veld</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: grote letters, een klok en tips om bij te sturen</li></ul></div>
+          <div class="verschil-kol wij"><span class="verschil-tag">SessionReady</span><h3>Een training op maat van uw ploeg</h3><ul class="wij-lijst"><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal berekend voor uw ploeg</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: alles op \xE9\xE9n scherm, met tips om bij te sturen</li></ul></div>
         </div>
       </section>
 
@@ -12136,14 +12148,14 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         <ol class="stappen-lijst">
           <li><h3>Stel uw ploeg \xE9\xE9n keer in</h3><p>Leeftijd, aantal spelers, niveau, uw stuk veld en het materiaal dat u echt hebt.</p></li>
           <li><h3>Kies wat u wilt aanleren</h3><p>Vrijlopen, de eerste aanname, druk zetten of afwerken. De training bouwt daar stap voor stap naartoe.</p></li>
-          <li><h3>Neem ze mee naar het veld</h3><p>Elke oefening met schets, uitleg en coachpunten. Werkt iets niet, dan wisselt u het met \xE9\xE9n tik.</p></li>
+          <li><h3>Neem ze mee naar het veld</h3><p>Open de training op uw gsm of druk ze af, en ga ermee het veld op.</p></li>
         </ol>
       </section>
 
       <section class="sectie toon" id="bib" aria-labelledby="h-bib">
         <div class="toon-tekst">
           <h2 id="h-bib">Een bibliotheek die zoekt zoals een trainer denkt</h2>
-          <p class="lead">Filter op leeftijd, leerdoel en onderwerp. Elke oefening heeft een veldschets, de opstelling en coachpunten.</p>
+          <p class="lead">Zoek zelf verder wanneer u wilt: filter op leeftijd, leerdoel en aantal spelers, en voeg wat u vindt toe aan uw training.</p>
           <ul class="vinkjes"><li>Meer dan 460 oefeningen, van U6 tot U13</li><li>Vier niveaus per oefening</li><li>Elke oefening opent in 2D of 3D</li><li>Teken en bewaar ook uw eigen oefeningen</li></ul>
         </div>
         <div class="scherm" aria-hidden="true">
@@ -12151,7 +12163,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <div class="bib">
             <div class="bib-zoek">Zoek een oefening</div>
             <div class="bib-filters"><span class="aan">U11</span><span class="aan">Vrijlopen</span><span>Druk zetten</span><span>Afwerken</span><span>8\u201314 spelers</span></div>
-            <div class="bib-raster">${["rondo-4-2", "derde-man", "x6-vrijlopen-4v4-neutralen", "x6-druk-trigger-slechte-pass", "x6-meteen-druk-vijf-seconden", "duo-pass-schot-race"]
+            <div class="bib-raster">${["kaatsparcours-afwerken", "passeren-hekjes-2v2", "x6-vrijlopen-4v4-neutralen", "x6-druk-trigger-slechte-pass", "x6-meteen-druk-vijf-seconden", "duo-pass-schot-race"]
               .map((id) => oefVan(id))
               .filter(Boolean)
               .map((o) => {
@@ -12170,11 +12182,11 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         </div>
         <div class="gsm" aria-hidden="true"><div class="gsm-in">
           <p class="gsm-fase">Oefening 3 van 5</p>
-          <p class="gsm-titel">Rondo 4 tegen 2</p>
+          <p class="gsm-titel">Driehoek met derde man</p>
           <p class="gsm-klok">12:40</p>
           <div class="gsm-balk"><span style="width:30%"></span></div>
-          ${SCHETS.rondo}
-          <ul><li>Lichaam open naar het veld</li><li>Na de pass: nieuwe lijn zoeken</li><li>Twee keer raken, dan spelen</li></ul>
+          ${(() => { const o = oefVan("derde-man"); if (!o) return SCHETS.drie; const sc = schetsVan(o); return schetsSvg(sc.items, sc.lijnen, o.veld, sc.zones); })()}
+          <ul><li>Pass op de voet van uw ploegmaat</li><li>Na de pass: meteen bewegen</li><li>Roep wie de bal krijgt</li></ul>
           <span class="gsm-knop">Volgende oefening</span>
         </div></div>
       </section>
@@ -12210,13 +12222,13 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       <section class="sectie" id="faq" aria-labelledby="h-faq">
         <h2 id="h-faq">Vragen van trainers</h2>
         <div class="faq">
-          <details><summary>Voor welke ploegen is SessionReady gemaakt?</summary><p>Voor jeugdploegen van U6 tot U13, in Belgi\xEB en in Nederland. In Belgi\xEB volgt de app de spelvormen van Voetbal Vlaanderen (2 tegen 2, 3 tegen 3, 5 tegen 5 en 8 tegen 8), in Nederland die van de KNVB (4 tegen 4, 6 tegen 6 en 8 tegen 8). De oefeningen, het veld en de wedstrijd op het einde passen zich aan de leeftijd aan.</p></details>
+          <details><summary>Voor welke ploegen is SessionReady gemaakt?</summary><p>Voor jeugdploegen van U6 tot U13, in Belgi\xEB en in Nederland. In Belgi\xEB volgt de app de spelvormen van Voetbal Vlaanderen (2 tegen 2, 3 tegen 3, 5 tegen 5 en 8 tegen 8), in Nederland die van de KNVB (4 tegen 4, 6 tegen 6 en 8 tegen 8). Oefeningen, veldgrootte en spelvorm passen zich aan de leeftijd aan.</p></details>
           <details><summary>Werkt het ook als ik maar acht spelers heb?</summary><p>Ja. U geeft per training het aantal spelers op, en de app kiest groepen en spelvormen die daarbij passen.</p></details>
           <details><summary>Hoe ziet een training eruit?</summary><p>Een opwarming met bal, een kern in twee stappen (eerst aanleren, dan toepassen tegen tegenstanders) en een wedstrijdvorm als slot. Elke oefening is een spel met een doel: de kinderen leren voetballen door te voetballen.</p></details>
           <details><summary>Wat als ik weinig materiaal heb?</summary><p>U vult \xE9\xE9n keer in wat u hebt. Ontbreekt er iets voor een oefening, dan staat erbij waarmee u het vervangt, bijvoorbeeld twee potjes als doeltje.</p></details>
           <details><summary>Werkt het op mijn gsm, ook op het veld?</summary><p>Ja, in de browser van uw gsm, zonder iets te installeren. U kunt de app op uw beginscherm zetten. Een training die u geopend hebt, blijft beschikbaar als het bereik aan het veld wegvalt.</p></details>
-          <details><summary>Kan ik mijn eigen oefeningen toevoegen?</summary><p>Ja. Teken ze op het tekenbord, in stappen die als animatie afspelen, of laat Coach Kiki ze uit een pdf of Word-bestand overnemen. Uw eigen oefeningen ziet alleen u, tenzij u ze deelt met uw club.</p></details>
-          <details><summary>Wie maakt de oefeningen?</summary><p>De oefeningen zijn uitgeschreven door een jeugdtrainer en volgen de spelvormen van Voetbal Vlaanderen en de KNVB. Elke oefening heeft een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
+          <details><summary>Kan ik mijn eigen oefeningen toevoegen?</summary><p>Ja. Teken ze op het tekenbord, in stappen die als animatie afspelen, of laat Coach Kiki ze uit een document overnemen. Uw eigen oefeningen ziet alleen u, tenzij u ze deelt met uw club.</p></details>
+          <details><summary>Wie maakt de oefeningen?</summary><p>De oefeningen zijn uitgeschreven door een jeugdtrainer en zijn afgestemd op de jeugdopleiding in Belgi\xEB en Nederland. Elke oefening heeft een veldschets, coachpunten en vier niveaus. Oefeningen die nog niet op het veld getest zijn, staan als nieuw gemarkeerd.</p></details>
           <details><summary>Kan ik het eerst proberen?</summary><p>Ja, met de demo bovenaan, zonder account. De app zelf doet veel meer: uw eigen ploeg, de hele bibliotheek, het tekenbord en de fiche op het veld.</p></details>
           <details><summary>Wat kost het?</summary><p>\u20AC 59 per seizoen, voor twaalf maanden. Of \u20AC 6,99 per maand als u maandelijks wilt kunnen opzeggen. De btw is inbegrepen.</p></details>
           <details><summary>Hoe werkt de studentenkorting?</summary><p>U maakt een account met uw gewone e-mail en bevestigt daarna uw studentenmail van een hogeschool of universiteit in Belgi\xEB of Nederland met een code. U betaalt \xE9\xE9n keer \u20AC 10 en hebt Pro zolang u student bent.</p></details>
