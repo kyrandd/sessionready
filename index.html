@@ -287,15 +287,28 @@ body[data-scherm=account] .kiki-btn,body[data-scherm=profiel] .kiki-btn,body[dat
 @media (max-width:520px){.voet{gap:10px 20px}}
 .veld-groep{margin:8px 0;padding:8px 12px;border-radius:8px;background:#e9f3ec;color:#14402a;font-weight:600;font-size:15px}
 
-.verschil h2{max-width:22ch}
-.verschil-raster{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:20px}
-.verschil-kol{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
-.verschil-kol h3{font:800 1.3rem var(--cond);margin:0 0 10px;color:var(--muted)}
-.verschil-kol ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--muted)}
-.verschil-kol.wij{background:var(--gras-diep,#0f3b28);border-color:transparent;color:#fff}
-.verschil-kol.wij h3{color:#ffb37a}
-.verschil-kol.wij ul{color:#e6f0ea}
-@media (max-width:640px){.verschil-raster{grid-template-columns:minmax(0,1fr)}}
+.verschil h2{max-width:24ch}
+.verschil-voor{font:700 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#c25a0c;margin:0 0 8px}
+.verschil .lead{color:var(--muted);max-width:40rem;margin-top:10px;font-size:1.15rem}
+.verschil-raster{display:grid;gap:18px;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);margin-top:26px;align-items:stretch}
+.verschil-kol{position:relative;border:1px solid var(--line);border-radius:16px;padding:24px 24px 26px;background:#fff}
+.verschil-kol h3{font:800 1.45rem/1.1 var(--cond);margin:0 0 14px;color:var(--muted)}
+.verschil-kol ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:16px}
+.verschil-kol li{position:relative;padding-left:30px;line-height:1.4}
+.kruisjes li{color:var(--muted)}
+.kruisjes li:before{content:"\2715";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#f1e3df;color:#a1452b;font:700 11px/20px var(--sans);text-align:center}
+.verschil-kol.wij{background:#0f3b28;border-color:transparent;color:#fff;box-shadow:0 24px 48px -24px #0f3b2899;padding-top:30px}
+.verschil-kol.wij h3{color:#fff;font-size:1.7rem}
+.verschil-kol.wij li{color:#e6f0ea;font-weight:600}
+.verschil-kol.wij li:before{content:"\2713";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#f47a20;color:#0f3b28;font:800 12px/20px var(--sans);text-align:center}
+.verschil-tag{position:absolute;top:-13px;left:22px;background:#f47a20;color:#0f3b28;font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+@media (max-width:720px){.verschil-raster{grid-template-columns:minmax(0,1fr)}.verschil-kol.wij{order:-1}}
+
+/* De zwevende Kiki-knop bedekt geen tekst meer: in de app zit Kiki in het menu, op de startpagina in het Kiki-blok. */
+body:has(.app-nav) .kiki-btn,body[data-scherm=start] .kiki-btn{display:none!important}
+#vraagkiki{margin-top:18px}
+/* Koppen: iets meer regelafstand zodat accenten en onderlengtes niet tegen elkaar komen. */
+h1,h2{line-height:1.08}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -12108,6 +12121,16 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
       </div>
     </header>
     <main>
+      <section class="sectie verschil" aria-labelledby="h-verschil">
+        <p class="verschil-voor">Waarom SessionReady</p>
+        <h2 id="h-verschil">Oefeningen vindt u overal. De training van vanavond niet.</h2>
+        <p class="lead">Andere sites geven u een stapel oefeningen. SessionReady geeft u de volledige training, klaar voor uw ploeg.</p>
+        <div class="verschil-raster">
+          <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul class="kruisjes"><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw spelers en uw materiaal</li><li>Op het veld: een pdf of een scherm vol tekst</li></ul></div>
+          <div class="verschil-kol wij"><span class="verschil-tag">SessionReady</span><h3>De training van vanavond, in \xE9\xE9n minuut</h3><ul class="wij-lijst"><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal voor uw spelers en uw veld</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: grote letters, een klok en tips om bij te sturen</li></ul></div>
+        </div>
+      </section>
+
       <section class="sectie" id="hoe" aria-labelledby="h-hoe">
         <h2 id="h-hoe">Van ploeg tot training in drie stappen</h2>
         <ol class="stappen-lijst">
@@ -12115,14 +12138,6 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <li><h3>Kies wat u wilt aanleren</h3><p>Vrijlopen, de eerste aanname, druk zetten of afwerken. De training bouwt daar stap voor stap naartoe.</p></li>
           <li><h3>Neem ze mee naar het veld</h3><p>Elke oefening met schets, uitleg en coachpunten. Werkt iets niet, dan wisselt u het met \xE9\xE9n tik.</p></li>
         </ol>
-      </section>
-
-      <section class="sectie verschil" aria-labelledby="h-verschil">
-        <h2 id="h-verschil">Oefeningen vindt u overal. De training van vanavond niet.</h2>
-        <div class="verschil-raster">
-          <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw aantal spelers en uw materiaal</li><li>Op het veld: een pdf of een scherm vol tekst</li></ul></div>
-          <div class="verschil-kol wij"><h3>SessionReady</h3><ul><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal voor uw spelers en uw veld</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: grote letters, een klok en de coachpunten</li></ul></div>
-        </div>
       </section>
 
       <section class="sectie toon" id="bib" aria-labelledby="h-bib">
@@ -12169,6 +12184,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
           <h2 id="h-kiki">Coach Kiki denkt met u mee</h2>
           <p class="lead">Loopt iets niet? Vertel Kiki wat moeilijk gaat. Hij stelt een vraag terug, geeft u ideeën om de oefening bij te sturen en zoekt er een passende oefening bij. Na de training vraagt hij hoe het ging, zodat de volgende training beter past.</p>
           <ul class="vinkjes"><li>Zeg het in uw eigen woorden, ook na een slechte training</li><li>Ideeën om makkelijker of moeilijker te maken</li><li>Zet uw eigen oefeningen uit een pdf of Word-bestand in de app</li></ul>
+          <button class="btn main" type="button" id="vraagkiki">Stel Kiki zelf een vraag</button>
         </div>
         <div class="kiki-toon">
           <div id="kiki-plek" class="kiki-plek" aria-hidden="true"></div>
@@ -12294,6 +12310,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         (noverons.onclick = naar("/over-ons")),
         (voverons.onclick = naar("/over-ons"));
     }
+    document.getElementById("vraagkiki")?.addEventListener("click", () => document.getElementById("kbtn")?.click());
     const vb = voorbeeldBord(),
       mini = document.getElementById("mini-bord");
     if (!mini) return;
