@@ -285,6 +285,17 @@ body[data-scherm=account] .kiki-btn,body[data-scherm=profiel] .kiki-btn,body[dat
 .demo-paneel .stapper output{flex:1;text-align:center}
 .voet>span:not(.voet-bedrijf){flex-basis:100%;margin-top:-4px}
 @media (max-width:520px){.voet{gap:10px 20px}}
+.veld-groep{margin:8px 0;padding:8px 12px;border-radius:8px;background:#e9f3ec;color:#14402a;font-weight:600;font-size:15px}
+
+.verschil h2{max-width:22ch}
+.verschil-raster{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:20px}
+.verschil-kol{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
+.verschil-kol h3{font:800 1.3rem var(--cond);margin:0 0 10px;color:var(--muted)}
+.verschil-kol ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--muted)}
+.verschil-kol.wij{background:var(--gras-diep,#0f3b28);border-color:transparent;color:#fff}
+.verschil-kol.wij h3{color:#ffb37a}
+.verschil-kol.wij ul{color:#e6f0ea}
+@media (max-width:640px){.verschil-raster{grid-template-columns:minmax(0,1fr)}}
 </style>
 <script type="module">import * as e from "three";
 import { OrbitControls as xe } from "three/examples/jsm/controls/OrbitControls.js";
@@ -6916,8 +6927,22 @@ function kameleonTip(o, n) {
   if (!o || !isPloegspel(o) || n < 5 || n % 2 === 0) return "";
   return `${n} spelers is oneven. Speel met een kameleon: \xE9\xE9n speler in een opvallend hesje speelt altijd mee met de ploeg die de bal heeft. Zo heeft de aanvallende ploeg een man meer, en iedereen speelt mee. Wissel de kameleon om de paar minuten.`;
 }
+function groepTip(o, n) {
+  const tekst = [o.vak, o.org, ...(o.mat || [])].join(" ");
+  const duo = /per duo|duo[\u2019']s|in duo/i.test(tekst),
+    drie = !duo && /per drietal|drietallen|per drie spelers/i.test(tekst);
+  if (!n || !(duo || drie)) return "";
+  const g = duo ? 2 : 3,
+    k = Math.floor(n / g),
+    rest = n % g,
+    naam = duo ? "duo\u2019s" : "drietallen",
+    extra = rest ? (duo ? " en \xE9\xE9n drietal" : rest === 1 ? " en \xE9\xE9n viertal" : " en \xE9\xE9n duo") : "";
+  return `Met ${n} spelers: ${k} ${naam}${extra} naast elkaar, elk met hun eigen materiaal.`;
+}
 function spelersTip(o, n) {
-  return n < o.sp[0]
+  return n >= o.sp[0] && n <= o.sp[1] && groepTip(o, n)
+    ? groepTip(o, n)
+    : n < o.sp[0]
     ? `Met ${n} spelers is dit krap (de oefening is voor ${o.sp[0]} tot ${o.sp[1]}): maak het vak kleiner, speel zelf mee als joker of laat een rol weg.`
     : n > o.sp[1]
       ? `Met ${n} spelers: zet de oefening ${Math.ceil(n / o.sp[1]) > 2 ? Math.ceil(n / o.sp[1]) + " keer" : "twee keer"} naast elkaar uit, zodat niemand lang wacht.`
@@ -10192,12 +10217,13 @@ const render = {
         <section class="veld-tekst">
           <h1 tabindex="-1">${esc(o.t)}</h1>
           ${variantTekst ? `<p class="veld-variant">${esc(variantTekst)}</p>` : ""}
+          ${spelersTip(o, t.spelers) ? `<p class="veld-groep">${esc(spelersTip(o, t.spelers))}</p>` : ""}
           ${i === 0 && t.motoriek ? `<p class="veld-motoriek">Motoriek, ${esc(t.motoriek[0].toLowerCase())}: ${esc(t.motoriek[1])}</p>` : ""}
           <ul class="veld-punten">${o.coach
             .slice(0, 3)
             .map((c) => `<li>${esc(c)}</li>`)
             .join("")}</ul>
-          <p class="veld-tip"><strong>Coach Kiki:</strong> ${esc(trainerstip(p?.leeftijd, i === 0 ? ["start", "voor"] : i === blokken.length - 1 ? ["slot"] : ["tijdens", "stoppen"], (t.id || "") + i).tekst)}</p>
+          <p class="veld-tip"><strong>Bijsturen:</strong> ${esc(o.mak && o.moe ? `Te moeilijk? ${o.mak.replace(/\.?$/, ".")} Te makkelijk? ${o.moe.replace(/\.?$/, ".")}` : trainerstip(p?.leeftijd, i === blokken.length - 1 ? ["slot"] : ["tijdens", "stoppen"], (t.id || "") + i).tekst)}</p>
         </section>
         <footer class="veld-voet">
           <button class="veld-nav" id="vvorig" ${i === 0 ? "disabled" : ""} aria-label="Vorige oefening">\u2039</button>
@@ -12047,7 +12073,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
   },
   start() {
     app.innerHTML = `<div class="land-kop"><nav class="kop" aria-label="Hoofdmenu"><button class="merk merk-knop" id="lmerk" aria-label="SessionReady, naar boven">${merk(!0)}</button>
-        <span class="navlinks"><button data-naar="hoe">Hoe het werkt</button><button data-naar="bib" id="nbib">Bibliotheek</button><button data-naar="tekenbord" id="nbord">Tekenbord</button><button data-naar="prijs">Prijzen</button><button data-naar="faq">Vragen</button><button id="noverons">Over ons</button></span>
+        <span class="navlinks"><button data-naar="hoe">Hoe het werkt</button><button data-naar="bib" id="nbib">Bibliotheek</button><button data-naar="prijs">Prijzen</button><button data-naar="faq">Vragen</button><button id="noverons">Over ons</button></span>
         <span class="navknoppen"><button class="btn licht" id="b">Inloggen</button><button class="btn kegel nav-cta" id="a0">Begin nu</button></span></nav></div>
       <header class="hero">
       <div class="hero-in hero-kort">
@@ -12091,11 +12117,19 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
         </ol>
       </section>
 
+      <section class="sectie verschil" aria-labelledby="h-verschil">
+        <h2 id="h-verschil">Oefeningen vindt u overal. De training van vanavond niet.</h2>
+        <div class="verschil-raster">
+          <div class="verschil-kol"><h3>Een gewone oefensite</h3><ul><li>Losse oefeningen: u zoekt en kiest zelf</li><li>Geschreven voor een ideale groep</li><li>U rekent zelf om naar uw aantal spelers en uw materiaal</li><li>Op het veld: een pdf of een scherm vol tekst</li></ul></div>
+          <div class="verschil-kol wij"><h3>SessionReady</h3><ul><li>Een volledige training rond \xE9\xE9n leerdoel, met een wedstrijd als slot</li><li>Vakken, groepen en materiaal voor uw spelers en uw veld</li><li>Werkt iets niet, dan wisselt u een oefening met \xE9\xE9n tik</li><li>Op het veld: grote letters, een klok en de coachpunten</li></ul></div>
+        </div>
+      </section>
+
       <section class="sectie toon" id="bib" aria-labelledby="h-bib">
         <div class="toon-tekst">
           <h2 id="h-bib">Een bibliotheek die zoekt zoals een trainer denkt</h2>
           <p class="lead">Filter op leeftijd, leerdoel en onderwerp. Elke oefening heeft een veldschets, de opstelling en coachpunten.</p>
-          <ul class="vinkjes"><li>Meer dan 460 oefeningen, van U6 tot U13</li><li>Vier niveaus per oefening</li><li>Elke oefening opent in 2D of 3D</li></ul>
+          <ul class="vinkjes"><li>Meer dan 460 oefeningen, van U6 tot U13</li><li>Vier niveaus per oefening</li><li>Elke oefening opent in 2D of 3D</li><li>Teken en bewaar ook uw eigen oefeningen</li></ul>
         </div>
         <div class="scherm" aria-hidden="true">
           <div class="scherm-balk"><span></span><span></span><span></span></div>
@@ -12112,15 +12146,6 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
               .join("")}</div>
           </div>
         </div>
-      </section>
-
-      <section class="sectie toon omgekeerd" id="tekenbord" aria-labelledby="h-bord">
-        <div class="toon-tekst">
-          <h2 id="h-bord">Teken uw eigen oefening, en laat ze bewegen</h2>
-          <p class="lead">Zet spelers, kegels, potjes en doeltjes op het veld, teken passes, looplijnen en dribbels, en verdeel de oefening in stappen. Bij het afspelen schuiven de spelers van stap naar stap.</p>
-          <ul class="vinkjes"><li>Vrij vak, 5 tegen 5, half veld en 8 tegen 8</li><li>Stappen die als animatie afspelen</li><li>Bewaar als afbeelding voor de WhatsApp-groep van uw ploeg</li></ul>
-        </div>
-        <div class="scherm"><div class="scherm-balk" aria-hidden="true"><span></span><span></span><span></span></div><svg id="mini-bord" class="mini-bord" role="img" aria-label="Voorbeeld van het tekenbord: rondo 4 tegen 2"></svg></div>
       </section>
 
       <section class="sectie toon" aria-labelledby="h-veld">
@@ -12186,7 +12211,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
 
       <section class="slot-cta" aria-labelledby="slot"><div class="slot-in"><h2 id="slot">Klaar voor uw volgende training?</h2><button class="btn" id="a2">Begin met SessionReady</button></div></section>
     </main>
-    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${(() => { const w = window.SR_SITE ? "" : "https://www.sessionready.be", t = window.SR_SITE ? "" : ' target="_blank" rel="noopener"'; return `<a class="link" href="${w}/juridisch"${t}>Bedrijfsgegevens en privacy</a><a class="link" href="${w}/voorwaarden"${t}>Voorwaarden</a>`; })()}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
+    <footer class="voet"><button class="merk klein-merk merk-knop" id="vmerk" aria-label="SessionReady, naar boven">${merk(!1)}</button><span>Voor jeugdtrainers U6\u2013U13.</span><button class="link" id="voverons">Over ons</button>${(() => { const thuis = window.SR_SITE || ECHT || PUBLIEK, w = thuis ? "" : "https://www.sessionready.be", t = thuis ? "" : ' target="_blank" rel="noopener"'; return `<a class="link" href="${w}/juridisch"${t}>Bedrijfsgegevens en privacy</a><a class="link" href="${w}/voorwaarden"${t}>Voorwaarden</a>`; })()}<span class="voet-bedrijf">SessionReady is een onderneming van Kyran Durand, Steenovenstraat 75, 8490 Varsenare. Ondernemingsnummer en btw BE 1032.826.702.</span></footer>`;
     for (const id of ["a", "a0", "a2", "a4"])
       document.getElementById(id).onclick = () => go("account", "registreren");
     (a3.onclick = () => {
@@ -12271,6 +12296,7 @@ Antwoord alleen met JSON: {"naam":"","thema":"","zoekwoorden":[],"focus":""}`,
     }
     const vb = voorbeeldBord(),
       mini = document.getElementById("mini-bord");
+    if (!mini) return;
     mini.setAttribute("viewBox", `0 0 ${VELDEN.vrij.w} ${VELDEN.vrij.h}`);
     const bewaard = bord;
     (bord = vb),
